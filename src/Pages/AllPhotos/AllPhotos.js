@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './AllPhotos.css'
+import './AllPhotos.css';
+import Sidebar from '../../Shared/Sidebar/Sidebar';
 const AllPhotos = () => {
     const [activeCategory, setActiveCategory] = useState('singlePhotoShot');
     const photos = {
@@ -29,53 +30,56 @@ const AllPhotos = () => {
         ],
     }
     const photoGallery = (photosArray) => (
-        <div className="mx-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="mx-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {photosArray.map((photo, index) => (
                 <img
                     key={index}
                     src={photo}
                     alt="gallery"
-                    className="w-[25rem] h-[24rem] object-cover rounded shadow-lg"
+                    className="w-[20rem] h-[24rem] object-cover rounded shadow-lg"
                 />
             ))}
         </div>)
     return (
-        <div className="flex flex-col items-center">
-            <div className="flex flex-row items-center gap-4">
-                <div className="bg-[rgb(42,193,235)] w-[3rem] h-[0.5rem]"></div>
-                <div className="text-[rgb(30,81,153)] text-[64px] font-bold">All Photos</div>
-                <div className="bg-[rgb(42,193,235)] w-[3rem] h-[0.5rem]"></div>
+        <div>
+            <div className="flex flex-col items-center px-12">
+                <div className="flex flex-row items-center gap-4">
+                    <div className="bg-[rgb(42,193,235)] w-[3rem] h-[0.5rem]"></div>
+                    <div className="text-[rgb(30,81,153)] text-[64px] font-bold">All Photos</div>
+                    <div className="bg-[rgb(42,193,235)] w-[3rem] h-[0.5rem]"></div>
+                </div>
+                <div className="flex gap-4 mb-8 mt-8">
+                    <button
+                        className={`px-4 py-2 rounded ${activeCategory === 'singlePhotoShot' ? 'active' : 'notActive'}`}
+                        onClick={() => setActiveCategory('singlePhotoShot')}
+                    >
+                        Single Photo Shot
+                    </button>
+                    <button
+                        className={`px-4 py-2 rounded ${activeCategory === 'roamingAroundWorld' ? 'active' : 'notActive'}`}
+                        onClick={() => setActiveCategory('roamingAroundWorld')}
+                    >
+                        Roaming Around the World
+                    </button>
+                    <button
+                        className={`px-4 py-2 rounded ${activeCategory === 'professionalLife' ? 'active' : 'notActive'}`}
+                        onClick={() => setActiveCategory('professionalLife')}
+                    >
+                        Professional Life
+                    </button>
+                    <button
+                        className={`px-4 py-2 rounded ${activeCategory === 'personalOld' ? 'active' : 'notActive'}`}
+                        onClick={() => setActiveCategory('personalOld')}
+                    >
+                        Personal Old Photos
+                    </button>
+                </div>
+                {activeCategory === 'roamingAroundWorld' && photoGallery(photos.roamingAroundWorld)}
+                {activeCategory === 'professionalLife' && photoGallery(photos.professionalLife)}
+                {activeCategory === 'personalOld' && photoGallery(photos.personalOld)}
+                {activeCategory === 'singlePhotoShot' && photoGallery(photos.singlePhotoShot)}
             </div>
-            <div className="flex gap-4 mb-8 mt-8">
-                <button
-                    className={`px-4 py-2 rounded ${activeCategory === 'singlePhotoShot' ? 'active' : 'notActive'}`}
-                    onClick={() => setActiveCategory('singlePhotoShot')}
-                >
-                    Single Photo Shot
-                </button>
-                <button
-                    className={`px-4 py-2 rounded ${activeCategory === 'roamingAroundWorld' ? 'active' : 'notActive'}`}
-                    onClick={() => setActiveCategory('roamingAroundWorld')}
-                >
-                    Roaming Around the World
-                </button>
-                <button
-                    className={`px-4 py-2 rounded ${activeCategory === 'professionalLife' ? 'active' : 'notActive'}`}
-                    onClick={() => setActiveCategory('professionalLife')}
-                >
-                    Professional Life
-                </button>
-                <button
-                    className={`px-4 py-2 rounded ${activeCategory === 'personalOld' ? 'active' : 'notActive'}`}
-                    onClick={() => setActiveCategory('personalOld')}
-                >
-                    Personal Old Photos
-                </button>
-            </div>
-            {activeCategory === 'roamingAroundWorld' && photoGallery(photos.roamingAroundWorld)}
-            {activeCategory === 'professionalLife' && photoGallery(photos.professionalLife)}
-            {activeCategory === 'personalOld' && photoGallery(photos.personalOld)}
-            {activeCategory === 'singlePhotoShot' && photoGallery(photos.singlePhotoShot)}
+            <Sidebar />
         </div>
     );
 };
