@@ -1,0 +1,18 @@
+.gallery-left-line {
+    width: 3rem;
+    height: 0.5rem;
+    margin-right: 1rem;
+    background-color: rgb(42, 193, 235);
+}
+
+.gallery-right-line {
+    width: 3rem;
+    height: 0.5rem;
+    margin-left: 1rem;
+    background-color: rgb(42, 193, 235);
+}
+
+.viewBtn {
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    background: rgb(42, 193, 235);
+}

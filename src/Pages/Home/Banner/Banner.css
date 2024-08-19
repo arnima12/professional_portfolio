@@ -1,0 +1,11 @@
+.client-photo img {
+    position: absolute;
+    right: 0;
+    z-index: 0;
+}
+
+.play-btn {
+    position: absolute;
+    top: 58%;
+    left: 36%;
+}

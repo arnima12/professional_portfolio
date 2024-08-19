@@ -1,0 +1,27 @@
+.rectangle1 {
+    position: relative;
+    width: 526px;
+    height: 590px;
+    box-sizing: border-box;
+    padding: 20px;
+    background: white;
+    background-clip: padding-box;
+    border: 8px solid transparent;
+    border-image: linear-gradient(to right, rgb(42, 193, 235), rgb(255, 255, 255));
+    border-image-slice: 1;
+    border-radius: 10px;
+}
+
+.rectangle2 {
+    position: relative;
+    width: 526px;
+    height: 590px;
+    box-sizing: border-box;
+    padding: 20px;
+    background: white;
+    background-clip: padding-box;
+    border: 8px solid transparent;
+    border-image: linear-gradient(to right, rgb(47, 94, 163), rgb(255, 255, 255));
+    border-image-slice: 1;
+    border-radius: 10px;
+}

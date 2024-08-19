@@ -1,0 +1,13 @@
+.title {
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.des {
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.readBtn {
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    background: rgb(42, 193, 235);
+}
