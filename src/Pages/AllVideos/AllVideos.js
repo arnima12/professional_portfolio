@@ -67,7 +67,7 @@ const AllVideos = () => {
     ]
     return (
         <div>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center w-[95%]">
                 <div className="flex flex-row items-center gap-4">
                     <div className="bg-[rgb(42,193,235)] w-[3rem] h-[0.5rem]"></div>
                     <div className="text-[rgb(30,81,153)] text-[64px] font-bold">Videos</div>
@@ -78,7 +78,7 @@ const AllVideos = () => {
                 </div>
 
             </div>
-            <Sidebar fullHeight={true} />
+            <Sidebar className="w-[5%]" fullHeight={true} />
         </div>
 
     );

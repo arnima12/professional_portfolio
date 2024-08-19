@@ -7,7 +7,7 @@ const AllVideo = ({ video }) => {
     return (
         <div>
             <div>
-                <img className="w-[24rem]" src={img} alt="" />
+                <img className="w-[28rem]" src={img} alt="" />
             </div>
             <div className="relative top-[-50%] left-[35%]">
                 <Link to={link}><FaYoutube className="text-[5rem] text-red-600" /></Link>
