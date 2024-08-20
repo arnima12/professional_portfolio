@@ -31,6 +31,7 @@ const AllBlogs = () => {
         new Date(latest.year) > new Date(current.year) ? latest : current
     );
     const sortedBlogs = allBlogs.sort((a, b) => new Date(b.year) - new Date(a.year));
+
     return (
         <div className="flex flex-col items-center w-[95%]">
             <div className="flex flex-col items-center w-full mb-8">
