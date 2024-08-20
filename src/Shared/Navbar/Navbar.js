@@ -31,7 +31,7 @@ const Navbar = () => {
         {
             id: 6,
             title: "News",
-            link: "/"
+            link: "/news"
         },
         {
             id: 7,
@@ -41,7 +41,7 @@ const Navbar = () => {
         {
             id: 8,
             title: "Blog",
-            link: "/"
+            link: "/allBlog"
         },
         {
             id: 9,

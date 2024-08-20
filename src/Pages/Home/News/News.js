@@ -6,12 +6,14 @@ const News = () => {
         {
             "id": "1",
             "title": "Lorem ipsum dolor sit amet, adipiscing elit",
+            "year": "2015-08-13",
             "img": "https://i.ibb.co/ZhQrCsy/shutterstock-1862662789-min-scaled.jpg",
             "des": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu convallis metus, in euismod diam. Praesent condimentum rhoncus purus, ut pretium lacus rhoncus sed. Aliquam placerat aliquam auctor. Integer feugiat porta risus, id tincidunt ante interdum quis. Nullam faucibus ex nec turpis ornare, sit amet faucibus augue condimentum. Aliquam erat volutpat."
         },
         {
             "id": "2",
             "title": "Lorem ipsum dolor sit amet, adipiscing elit",
+            "year": "2016-08-13",
             "img": "https://i.ibb.co/ZhQrCsy/shutterstock-1862662789-min-scaled.jpg",
             "des": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu convallis metus, in euismod diam. Praesent condimentum rhoncus purus, ut pretium lacus rhoncus sed. Aliquam placerat aliquam auctor. Integer feugiat porta risus, id tincidunt ante interdum quis. Nullam faucibus ex nec turpis ornare, sit amet faucibus augue condimentum. Aliquam erat volutpat."
         },
