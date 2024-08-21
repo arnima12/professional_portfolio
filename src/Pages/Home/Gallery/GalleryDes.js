@@ -3,9 +3,9 @@ import './Gallery.css'
 const GalleryDes = ({ galleryDes }) => {
     const { name, des, img } = galleryDes;
     return (
-        <div className="flex border-[1px] border-l-[1rem] shadow-md border-[rgb(42,193,235)] mx-8 gap-8">
-            <div>
-                <img className="h-[18rem] w-[20rem]" src={img} alt="" />
+        <div className="flex flex-col lg:flex-row border-[1px] border-l-[1rem] shadow-md border-[rgb(42,193,235)] mx-8 gap-8">
+            <div className="flex justify-center">
+                <img className="h-[28rem] lg:h-[18rem] w-full lg:w-[20rem]" src={img} alt="" />
             </div>
             <div className="p-6">
                 <div className="text-[rgb(54,121,215)] text-[40px] font-[700] text-left">

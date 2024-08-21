@@ -25,7 +25,7 @@ const News = () => {
                 <div className="text-[rgb(30,81,153)] text-[64px] font-bold">News</div>
             </div>
             <p className="text-left text-black font-[600] text-[24px] mb-10">The news and articles written on the internet.</p>
-            <div className="flex justify-evenly">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {news.map((info) => <New key={info.id} info={info}></New>)}
             </div>
         </div>
