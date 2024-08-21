@@ -73,7 +73,7 @@ const AllVideos = () => {
                     <div className="text-[rgb(30,81,153)] text-[64px] font-bold">Videos</div>
                     <div className="bg-[rgb(42,193,235)] w-[3rem] h-[0.5rem]"></div>
                 </div>
-                <div className="grid grid-cols-3 gap-4 mt-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 justify-items-center">
                     {allVideos.map((video) => <AllVideo key={video.id} video={video}></AllVideo>)}
                 </div>
 

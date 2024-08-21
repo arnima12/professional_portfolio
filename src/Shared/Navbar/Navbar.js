@@ -13,8 +13,6 @@ const Navbar = () => {
 
     const menuItems = [
         { id: 1, title: "Home", link: "/" },
-        { id: 2, title: "About", link: "/about" },
-        { id: 3, title: "Education", link: "/education" },
         { id: 4, title: "Gallery", link: "/photo" },
         { id: 5, title: "Video", link: "/video" },
         { id: 6, title: "News", link: "/news" },
@@ -32,7 +30,7 @@ const Navbar = () => {
                 <div className="dropdown">
                     <label
                         tabIndex={0}
-                        className="btn btn-ghost lg:hidden"
+                        className="btn btn-ghost xl:hidden"
                         onClick={toggleDropdown}
                     >
                         {isDropdownOpen ? (
@@ -73,7 +71,7 @@ const Navbar = () => {
                     )}
                 </div>
             </div>
-            <div className="navbar-center hidden lg:flex">
+            <div className="navbar-center hidden xl:flex">
                 <ul className="menu menu-horizontal px-1">
                     {menuItems.map(item => (
                         <li className="font-bold text-2xl" key={item.id}>

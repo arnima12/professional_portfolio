@@ -26,7 +26,7 @@ const Gallery = () => {
         <div>
             <div className="flex items-center justify-center">
                 <div className="gallery-left-line  hidden lg:block"></div>
-                <div className="content text-[64px] text-[rgb(30,81,153)] font-bold">Gallery</div>
+                <div className="content text-[50px] md:text-[64px] text-[rgb(30,81,153)] font-bold">Gallery</div>
                 <div className="gallery-horizontal-line gallery-right-line  hidden lg:flex items-center"></div>
             </div>
             <div className="text-center text-[rgb(50,48,48)] text-[28px] font-[500]">My memories and moments captured here.</div>

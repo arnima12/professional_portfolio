@@ -33,7 +33,7 @@ const AllBlogs = () => {
     const sortedBlogs = allBlogs.sort((a, b) => new Date(b.year) - new Date(a.year));
 
     return (
-        <div className="flex flex-col items-center w-[95%]">
+        <div className="flex flex-col items-center w-[95%] mb-8">
             <div className="flex flex-col items-center w-full mb-8">
                 <div className="flex flex-row items-center gap-4 my-8">
                     <div className="bg-[rgb(42,193,235)] w-[3rem] h-[0.5rem]"></div>
@@ -46,7 +46,7 @@ const AllBlogs = () => {
                 All Articls
             </div>
             <div className="flex flex-col w-[93%] mb-8">
-                <div className="grid grid-cols-3 gap-12">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-8 justify-items-center">
                     {sortedBlogs.map((blog) => (
                         <AllBlog key={blog.id} allBlog={blog} />
                     ))}

@@ -26,7 +26,7 @@ const Blogs = () => {
         <div>
             <div className="flex items-center justify-center">
                 <div className="blog-left-line  hidden lg:block"></div>
-                <div className="content text-[64px] text-[rgb(30,81,153)] font-bold">My Blogs</div>
+                <div className="content text-[50px] md:text-[64px] text-[rgb(30,81,153)] font-bold">My Blogs</div>
                 <div className="blog-right-line  hidden lg:flex items-center"></div>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 justify-items-center mt-16">

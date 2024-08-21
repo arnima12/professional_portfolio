@@ -4,7 +4,7 @@ const New = ({ info }) => {
     const { title, img, des } = info;
     return (
         <div>
-            <div className="title">
+            <div className="title w-[28rem]">
                 <img src={img} alt="news_img" className="h-[10rem] w-[28rem]" />
                 <h2 className="text-left w-[28rem] font-semibold text-2xl text-[rgb(47,94,163)] p-4">{title}</h2>
             </div>

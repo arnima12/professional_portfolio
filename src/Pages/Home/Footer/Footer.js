@@ -5,7 +5,7 @@ import { MdEmail, MdPhoneInTalk } from 'react-icons/md';
 const Footer = () => {
     return (
         <div className=" bg-[rgb(42,51,68)]">
-            <div className="flex justify-around w-full px-8 py-6">
+            <div className="flex flex-col lg:flex-row gap-10 justify-around w-full px-8 py-6">
                 <div className="w-[30rem]">
                     <div className="flex items-center text-white">
                         <CiLocationOn className=" text-6xl " />

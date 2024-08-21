@@ -22,10 +22,10 @@ const News = () => {
         <div className="px-8 my-10">
             <div className="flex flex-row items-center gap-4">
                 <div className="bg-[rgb(42,193,235)] w-[3rem] h-[0.5rem]"></div>
-                <div className="text-[rgb(30,81,153)] text-[64px] font-bold">News</div>
+                <div className="text-[rgb(30,81,153)] text-[50px] md:text-[64px] font-bold">News</div>
             </div>
             <p className="text-left text-black font-[600] text-[24px] mb-10">The news and articles written on the internet.</p>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 justify-items-center">
                 {news.map((info) => <New key={info.id} info={info}></New>)}
             </div>
         </div>

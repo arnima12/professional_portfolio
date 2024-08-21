@@ -37,7 +37,7 @@ const AllNews = () => {
                 Print News Media
             </div>
             <div className="flex flex-col w-[93%] mb-8">
-                <div className="grid grid-cols-3 gap-12">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 justify-items-center">
                     {sortedNews.map((news) => (
                         <AllNew key={news.id} allNew={news} />
                     ))}

@@ -48,7 +48,7 @@ const Education = () => {
         <div className="px-8 my-16">
             <div className="flex flex-row items-center justify-center lg:justify-start gap-4">
                 <div className="bg-[rgb(42,193,235)] w-[3rem] h-[0.5rem]"></div>
-                <div className="text-[rgb(30,81,153)] text-[64px] font-bold">My Education</div>
+                <div className="text-[rgb(30,81,153)] text-[50px] md:text-[64px] font-bold">My Education</div>
             </div>
             <div className="grid xl:grid-cols-5 lg:grid-cols-3 grid-cols-1 gap-8 mt-8 justify-items-center">
                 {

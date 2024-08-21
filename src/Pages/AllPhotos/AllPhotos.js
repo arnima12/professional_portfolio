@@ -30,7 +30,7 @@ const AllPhotos = () => {
         ],
     }
     const photoGallery = (photosArray) => (
-        <div className="mx-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="mx-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10 pb-10">
             {photosArray.map((photo, index) => (
                 <img
                     key={index}
@@ -79,7 +79,7 @@ const AllPhotos = () => {
                 {activeCategory === 'personalOld' && photoGallery(photos.personalOld)}
                 {activeCategory === 'singlePhotoShot' && photoGallery(photos.singlePhotoShot)}
             </div>
-            <Sidebar />
+            <Sidebar fullHeight={true} />
         </div>
     );
 };

@@ -1,7 +1,5 @@
 .rectangle1 {
     position: relative;
-    width: 526px;
-    height: 590px;
     box-sizing: border-box;
     padding: 20px;
     background: white;
@@ -14,8 +12,6 @@
 
 .rectangle2 {
     position: relative;
-    width: 526px;
-    height: 590px;
     box-sizing: border-box;
     padding: 20px;
     background: white;

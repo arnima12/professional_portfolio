@@ -7,8 +7,8 @@ const AllBlog = ({ latestBlog, allBlog }) => {
 
     if (latestBlog) {
         return (
-            <div className="latestBlog flex gap-8 mb-8 w-[93%] py-8">
-                <div className="w-[40rem] text-left pb-8 ml-12">
+            <div className="latestBlog flex flex-col-reverse lg:flex-row gap-8 mb-8 w-[93%] py-8">
+                <div className="w-[20rem] lg:w-[40rem] text-left pb-8 ml-12">
                     <h2 className="font-[500] text-[48px] text-[rgb(47,94,163)]">{title}</h2>
                     <h3 className="text-[rgb(42,193,235)] font-[800] mb-4">{year}</h3>
                     <p className="font-[600]">{des?.slice(0, 600)}</p>
@@ -20,8 +20,8 @@ const AllBlog = ({ latestBlog, allBlog }) => {
                         </Link>
                     </div>
                 </div>
-                <div className="flex items-center mr-6 justify-end w-[50%]">
-                    <img src={img} alt="blog" className="w-[30rem]" />
+                <div className="flex items-center mr-6 justify-end w-full lg:w-[50%]">
+                    <img src={img} alt="blog" className="w-full lg:w-[30rem] px-4" />
                 </div>
             </div>
         );

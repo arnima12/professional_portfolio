@@ -3,7 +3,7 @@ import { FaFacebook, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 const Sidebar = ({ fullHeight }) => {
     return (
-        <div className={`bg-[rgb(42,51,68)] z-50  lg:w-[4%] flex lg:flex-col items-center lg:py-28 gap-12 lg:top-0 lg:right-0 bottom-[-6rem] h-[4rem] px-4 py-4 w-full ${fullHeight ? 'fixed lg:h-full ' : 'absolute lg:h-[56rem]'}`}>
+        <div className={`bg-[rgb(42,51,68)] z-50  lg:w-[4%] flex lg:flex-col items-center lg:py-28 gap-12  h-[4rem] px-4 py-4 w-full ${fullHeight ? 'fixed lg:h-full lg:top-0 lg:right-0 bottom-0 w-full' : 'absolute lg:h-[56rem] lg:top-0 lg:right-0 bottom-[-6rem]'}`}>
             <div>
                 <Link to="/">
                     <FaLinkedin className="text-[rgb(68,111,223)] text-[2.5rem]" /></Link>
