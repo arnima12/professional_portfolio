@@ -1,0 +1,21 @@
+.signUp-left {
+    border-radius: 20px 0px 0px 20px;
+    background: linear-gradient(180.00deg, rgb(17, 72, 153), rgb(27, 66, 124) 55.5%, rgb(6, 24, 51) 100%);
+}
+
+.signUp-right {
+    border-radius: 0px 20px 20px 0px;
+    background: rgb(217, 217, 217);
+}
+
+.text-animate {
+    color: transparent;
+    -webkit-text-stroke: 2px white;
+}
+
+.signUp button {
+    box-sizing: border-box;
+    border: 4px solid rgb(255, 255, 255);
+    border-radius: 40px;
+
+}

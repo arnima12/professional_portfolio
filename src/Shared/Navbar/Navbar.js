@@ -13,12 +13,11 @@ const Navbar = () => {
 
     const menuItems = [
         { id: 1, title: "Home", link: "/" },
+        { id: 2, title: "Dashboard", link: "/dashboard" },
         { id: 4, title: "Gallery", link: "/photo" },
         { id: 5, title: "Video", link: "/video" },
         { id: 6, title: "News", link: "/news" },
-        { id: 7, title: "Testimonials", link: "/testimonials" },
-        { id: 8, title: "Blog", link: "/allBlog" },
-        { id: 9, title: "Contact", link: "/contact" }
+        { id: 8, title: "Blog", link: "/allBlog" }
     ];
 
     return (
@@ -58,7 +57,7 @@ const Navbar = () => {
                             className="menu menu-compact dropdown-content mt-3 p-4 shadow rounded-box glow-btn bg-white w-[30rem] bg-opacity-70"
                         >
                             {menuItems.map((item) => (
-                                <li className="font-bold text-3xl mb-4" key={item.id}>
+                                <li className="mb-4 font-bold text-2xl hover:bg-gradient-to-r from-blue-700 via-blue-400 to-blue-200 hover:text-white rounded-lg" key={item.id}>
                                     <Link
                                         to={item.link}
                                         onClick={() => setIsDropdownOpen(false)}
@@ -74,7 +73,7 @@ const Navbar = () => {
             <div className="navbar-center hidden xl:flex">
                 <ul className="menu menu-horizontal px-1">
                     {menuItems.map(item => (
-                        <li className="font-bold text-2xl" key={item.id}>
+                        <li className="font-bold text-2xl hover:bg-gradient-to-r from-blue-700 via-blue-400 to-blue-200 hover:text-white rounded-lg ml-8" key={item.id}>
                             <Link to={item.link}>
                                 {item.title}
                             </Link>
@@ -83,7 +82,9 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-
+                <Link to="/signUp" className="font-bold text-2xl hover:bg-gradient-to-r from-blue-700 via-blue-400 to-blue-200 hover:text-white rounded-lg px-4 py-2 mr-20">
+                    Sign Up
+                </Link>
             </div>
         </div>
     );

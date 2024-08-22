@@ -7,6 +7,7 @@ import AllBlogs from "../../Pages/AllBlogs/AllBlogs";
 import LatestBlogPage from "../../Pages/AllBlogs/LatestBlogPage";
 import AllNews from "../../Pages/AllNews/AllNews";
 import NewsPage from "../../Pages/AllNews/NewsPage";
+import SignUp from "../../Pages/SignUp/SignUp";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +41,14 @@ const router = createBrowserRouter([
             {
                 path: "/video",
                 element: <AllVideos />,
+            },
+            {
+                path: "/dashboard",
+                element: <AllVideos />,
+            },
+            {
+                path: "/signup",
+                element: <SignUp />,
             },
 
         ]

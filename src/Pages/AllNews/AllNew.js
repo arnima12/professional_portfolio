@@ -14,7 +14,7 @@ const AllNew = ({ latestNew, allNew }) => {
                     <p className="font-[600]">{des?.slice(0, 600)}</p>
                     <div>
                         <Link to={`/news/${id}`} state={{ news }}>
-                            <button className="text-[rgb(30,81,153)] font-[600] text-[26px] px-2 mt-4">
+                            <button className="news-btn text-[rgb(30,81,153)] font-[600] text-[26px] px-2 mt-4">
                                 Read More
                             </button>
                         </Link>

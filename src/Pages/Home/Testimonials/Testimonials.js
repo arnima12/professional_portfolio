@@ -1,6 +1,6 @@
 import React from 'react';
 import Testimonial from './Testimonial';
-
+import './Testimonials.css'
 const Testimonials = () => {
     const testimonials = [
         {
@@ -29,13 +29,13 @@ const Testimonials = () => {
         }
     ]
     return (
-        <div className="mt-12 bg-[rgb(24,77,150)] py-8">
+        <div className="testimonial-section mt-16 bg-[rgb(24,77,150)] py-8">
             <div className="flex items-center justify-center">
                 <div className="blog-left-line  hidden lg:block"></div>
                 <div className="content text-[50px] md:text-[64px] text-[rgb(68,111,223)] font-bold">Testimonials</div>
                 <div className="blog-right-line  hidden lg:flex items-center"></div>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 justify-items-center mt-10">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 justify-items-center mt-10">
                 {testimonials.map((testimonial) => <Testimonial key={testimonial.id} testimonial={testimonial}></Testimonial>)}
             </div>
 

@@ -1,3 +1,19 @@
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.news-section {
+    animation: slideInFromRight 1.5s ease-out;
+}
+
 .title {
     box-sizing: border-box;
     border: 1px solid rgba(0, 0, 0, 0.25);
@@ -10,4 +26,9 @@
 .readBtn {
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
     background: rgb(42, 193, 235);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.readBtn:hover {
+    box-shadow: 0px 0px 20px 5px rgba(14, 194, 244, 0.8);
 }

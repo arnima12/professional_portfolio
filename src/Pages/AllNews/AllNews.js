@@ -1,7 +1,7 @@
 import React from 'react';
 import AllNew from './AllNew';
 import Sidebar from '../../Shared/Sidebar/Sidebar';
-
+import './AllNews.css';
 const AllNews = () => {
     const allNews = [
         {

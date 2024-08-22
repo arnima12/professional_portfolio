@@ -1,0 +1,9 @@
+.news-btn {
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    background: rgb(42, 193, 235);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.news-btn:hover {
+    box-shadow: 0px 0px 20px 5px rgba(14, 194, 244, 0.8);
+}

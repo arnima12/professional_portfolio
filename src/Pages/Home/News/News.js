@@ -1,6 +1,6 @@
 import React from 'react';
 import New from './New';
-
+import './News.css'
 const News = () => {
     const news = [
         {
@@ -19,7 +19,7 @@ const News = () => {
         },
     ]
     return (
-        <div className="px-8 my-10">
+        <div className="px-8 mt-16 mb-8 news-section">
             <div className="flex flex-row items-center gap-4">
                 <div className="bg-[rgb(42,193,235)] w-[3rem] h-[0.5rem]"></div>
                 <div className="text-[rgb(30,81,153)] text-[50px] md:text-[64px] font-bold">News</div>

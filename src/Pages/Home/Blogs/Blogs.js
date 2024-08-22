@@ -23,7 +23,7 @@ const Blogs = () => {
         },
     ]
     return (
-        <div>
+        <div className="blogs-section ">
             <div className="flex items-center justify-center">
                 <div className="blog-left-line  hidden lg:block"></div>
                 <div className="content text-[50px] md:text-[64px] text-[rgb(30,81,153)] font-bold">My Blogs</div>

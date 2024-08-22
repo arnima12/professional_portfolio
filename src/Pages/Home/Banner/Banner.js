@@ -5,6 +5,7 @@ import clientPhoto from "../../../assets/banner.png"
 import { FaPlayCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Sidebar from '../../../Shared/Sidebar/Sidebar';
+import 'animate.css';
 const Banner = () => {
     return (
         <div className="flex gap-0">
@@ -19,7 +20,7 @@ const Banner = () => {
                             <h1 className="text-3xl md:text-5xl lg:text-7xl text-white mt-2">Sanjida Alam</h1>
                             <h2 className="text-[rgb(42,193,235)] text-3xl md:text-4xl lg:text-6xl mt-2">Financial Expert and Cultural Enthusiast</h2>
                             <div className="mt-10">
-                                <button className="bg-white p-2 text-[rgb(30,81,153)] text-3xl lg:text-5xl font-semibold">View More</button>
+                                <button className="banner-btn bg-white p-2 text-[rgb(30,81,153)] text-3xl lg:text-5xl font-semibold">View More</button>
                             </div>
                         </div>
                     </div>

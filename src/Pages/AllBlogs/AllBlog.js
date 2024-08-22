@@ -14,7 +14,7 @@ const AllBlog = ({ latestBlog, allBlog }) => {
                     <p className="font-[600]">{des?.slice(0, 600)}</p>
                     <div>
                         <Link to={`/blog/${id}`} state={{ blog }}>
-                            <button className="text-[rgb(30,81,153)] font-[600] text-[26px] px-2 mt-4">
+                            <button className="text-[rgb(30,81,153)] blogs-btn font-[600] text-[26px] px-2 mt-4">
                                 Read More
                             </button>
                         </Link>

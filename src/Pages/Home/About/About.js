@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const About = () => {
     return (
-        <div className="w-full grid grid-cols-1 justify-items-start gap-20 lg:grid-cols-2 lg:justify-items-stretch lg:gap-4 mt-28 lg:mt-16 pl-8 mb-8">
+        <div className="about-section w-full grid grid-cols-1 justify-items-start gap-20 lg:grid-cols-2 lg:justify-items-stretch lg:gap-4 mt-36 lg:mt-16 pl-8 mb-8">
             <div className="relative w-[38%]">
                 <div className="rectangle2 w-[350px] h-[400px] md:w-[526px] md:h-[590px]">
                     <div className="rectangle1 w-[350px] h-[400px] md:w-[526px] md:h-[590px]">
