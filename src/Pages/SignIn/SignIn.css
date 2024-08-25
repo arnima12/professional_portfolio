@@ -1,0 +1,26 @@
+.input-with-icon3::placeholder,
+.input-with-icon4::placeholder {
+    color: rgb(27, 66, 124);
+    font-size: 20px;
+    font-weight: 400;
+    padding-left: 1rem
+}
+
+.input-with-icon3,
+.input-with-icon4 {
+    background-color: rgb(122, 173, 255);
+    background-repeat: no-repeat;
+    background-position: 14px center;
+    background-size: 1.5rem;
+    border: 4px solid rgb(255, 255, 255);
+    border-radius: 2.5rem;
+    margin: 1rem 0;
+}
+
+.input-with-icon3 {
+    background-image: url('https://i.ibb.co/Js3sY68/image.png');
+}
+
+.input-with-icon4 {
+    background-image: url('https://i.ibb.co/vDQQKxq/image.png');
+}

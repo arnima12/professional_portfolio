@@ -8,6 +8,7 @@ import LatestBlogPage from "../../Pages/AllBlogs/LatestBlogPage";
 import AllNews from "../../Pages/AllNews/AllNews";
 import NewsPage from "../../Pages/AllNews/NewsPage";
 import SignUp from "../../Pages/SignUp/SignUp";
+import SignIn from "../../Pages/SignIn/SignIn";
 
 const router = createBrowserRouter([
     {
@@ -47,8 +48,12 @@ const router = createBrowserRouter([
                 element: <AllVideos />,
             },
             {
-                path: "/signup",
+                path: "/signUp",
                 element: <SignUp />,
+            },
+            {
+                path: "/signIn",
+                element: <SignIn />,
             },
 
         ]
