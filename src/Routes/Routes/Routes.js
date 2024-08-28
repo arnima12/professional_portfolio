@@ -9,7 +9,8 @@ import AllNews from "../../Pages/AllNews/AllNews";
 import NewsPage from "../../Pages/AllNews/NewsPage";
 import SignUp from "../../Pages/SignUp/SignUp";
 import SignIn from "../../Pages/SignIn/SignIn";
-
+import Dashboard from "../../Admin/Dashboard/Dashboard"
+import UploadProject from "../../Admin/UploadProject/UploadProject";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -44,10 +45,6 @@ const router = createBrowserRouter([
                 element: <AllVideos />,
             },
             {
-                path: "/dashboard",
-                element: <AllVideos />,
-            },
-            {
                 path: "/signUp",
                 element: <SignUp />,
             },
@@ -55,6 +52,14 @@ const router = createBrowserRouter([
                 path: "/signIn",
                 element: <SignIn />,
             },
+            {
+                path: "/dashboard",
+                element: <Dashboard />,
+            },
+            {
+                path: "/dashboard/upload",
+                element: <UploadProject />,
+            }
 
         ]
     }

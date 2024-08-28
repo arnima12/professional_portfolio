@@ -23,13 +23,12 @@ const SignIn = () => {
                         /><br />
                         <div>
                             <button className="text-white px-16 py-2 text-2xl font-[700] mt-8 bg-transparent">
-                                Sign Up
+                                Sign In
                             </button>
                         </div>
                     </form>
                 </div>
                 <SignUpRight />
-
             </div>
         </div>
     );
