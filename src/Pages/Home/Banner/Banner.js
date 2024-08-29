@@ -27,7 +27,7 @@ const Banner = () => {
                 </div>
                 <div className="bg-sky-500 w-[40%] md:w-[60%] h-[50rem]">
                     <div className="client-photo">
-                        <img src={clientPhoto} alt="" className="h-[30rem] lg:h-[40rem] w-[15rem] md:w-[40rem] lg:w-[50rem] lg:bottom-[3rem] bottom-[10rem]" />
+                        <img src={clientPhoto} alt="" className="h-[30rem] lg:h-[40rem] w-[15rem] md:w-[40rem] lg:w-[50rem] lg:bottom-[1rem] bottom-[5rem]" />
                     </div>
                     <div className="font-bold text-2xl md:text-4xl lg:text-6xl text-start flex gap-4 items-end h-full relative z-1">
                         <div className="bg-white flex w-full py-6">
