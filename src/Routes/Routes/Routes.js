@@ -9,8 +9,8 @@ import AllNews from "../../Pages/AllNews/AllNews";
 import NewsPage from "../../Pages/AllNews/NewsPage";
 import SignUp from "../../Pages/SignUp/SignUp";
 import SignIn from "../../Pages/SignIn/SignIn";
-import Dashboard from "../../Admin/Dashboard/Dashboard"
-import UploadProject from "../../Admin/UploadProject/UploadProject";
+import Dashboard from "../../Admin/Dashboard/Dashboard";
+import UploadProject from "../../Admin/Dashboard/UploadProject";
 const router = createBrowserRouter([
     {
         path: "/",

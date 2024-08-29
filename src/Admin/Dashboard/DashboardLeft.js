@@ -2,21 +2,23 @@ import React from 'react';
 import logo from '../../assets/logo.png';
 import { Link } from 'react-router-dom';
 import { IoMdMenu } from "react-icons/io";
+import { useDropdown } from './DropdownContext/DropdownContext';
 
-const DashboardLeft = ({ isDropdownOpen, toggleDropdown }) => {
+const DashboardLeft = () => {
+    const { isDropdownOpen, toggleDropdown } = useDropdown()
     const dashboardMenu = [
         { id: "1", img: "https://i.ibb.co/JF2QhYc/dashboard.png", title: "Dashboard", link: "/dashboard" },
         { id: "2", img: "https://i.ibb.co/KV6tz41/personal.png", title: "Personal Info", link: "/dashboard" },
         { id: "3", img: "https://i.ibb.co/DVm9vgJ/view.png", title: "View Projects", link: "/dashboard" },
         { id: "4", img: "https://i.ibb.co/jb4qW6P/analytics.png", title: "Analytics", link: "/dashboard" },
-        { id: "5", img: "https://i.ibb.co/f9kXx3M/upload.png", title: "Upload Projects", link: "/dashboard/upload" },
+        { id: "5", img: "https://i.ibb.co/f9kXx3M/upload.png", title: "Upload Projects", link: `/dashboard/upload?dropdown=${isDropdownOpen}` },
         { id: "6", img: "https://i.ibb.co/xqCSpPj/settings.png", title: "Settings", link: "/dashboard" },
         { id: "7", img: "https://i.ibb.co/R061XFx/logout.png", title: "Logout", link: "/dashboard" },
     ];
 
     return (
         <div
-            className={`dashboard-left transition-all duration-100 px-6 ${isDropdownOpen ? 'h-[50rem] w-[100%]' : 'h-[4rem] w-[100%]'} ${isDropdownOpen ? 'md:pb-[12rem] md:w-[20%] md:h-[100%]' : 'md:pb-[12rem] md:w-[6%] md:h-[100%]'} `}
+            className={`dashboard-left transition-all duration-100 px-6 ${isDropdownOpen ? 'h-[50rem] w-[100%]' : 'h-[4rem] w-[100%]'} ${isDropdownOpen ? 'md:pb-[16.5rem] md:w-[20%] md:h-[100%]' : 'md:pb-[16.5rem] md:w-[6%] md:h-[100%]'} `}
         >
             <div className="mt-4 flex items-center justify-between">
                 {isDropdownOpen ? (
@@ -25,11 +27,11 @@ const DashboardLeft = ({ isDropdownOpen, toggleDropdown }) => {
                             <img src={logo} alt="logo" />
                         </div>
                         <div>
-                            <IoMdMenu className="text-3xl text-white" onClick={toggleDropdown} />
+                            <IoMdMenu className="text-3xl text-white cursor-pointer" onClick={toggleDropdown} />
                         </div>
                     </>
                 ) : (
-                    <div>
+                    <div className="flex justify-center ml-2 cursor-pointer">
                         <IoMdMenu className="text-3xl text-white" onClick={toggleDropdown} />
                     </div>
                 )}

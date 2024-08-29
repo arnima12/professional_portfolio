@@ -1,13 +1,13 @@
 import React from 'react';
-import DashboardLeft from '../Dashboard/DashboardLeft';
+import DashboardLeft from './DashboardLeft';
 import { IoIosSearch } from 'react-icons/io';
-import DashboardRight from '../Dashboard/DashboardRight';
-import browse from '../../assets/browse.png';
+import DashboardRight from './DashboardRight';
+import browse from "../../assets/browse.png";
 const UploadProject = () => {
     return (
-        <div className="flex">
+        <div className="flex flex-col md:flex-row">
             <DashboardLeft />
-            <div className="center ml-8 mt-4 w-[60%]">
+            <div className="center ml-8 mt-4 w-[90%] md:w-[60%]">
                 <div className="flex justify-between">
                     <div>
                         <h2 className="text-[rgb(27,66,124)] text-[48px] font-[700]">Upload Projects</h2>
@@ -19,7 +19,7 @@ const UploadProject = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-between mt-16 mx-32">
+                <div className="grid grid-cols-2 md:grid-cols-4 justify-items-center gap-8 mt-16 md:mx-32">
                     <div className="w-[10rem] h-[2rem] border-2 border-[rgb(17,72,153)] text-[rgb(17,72,153)] text-xl font-bold rounded-lg px-2">
                         Add Image
                     </div>
@@ -35,7 +35,7 @@ const UploadProject = () => {
                 </div>
                 <div className="w-full mt-12 ">
                     <div className="flex items-center flex-col">
-                        <div className="border-dashed border-2 w-[32rem] flex flex-col items-center border-[rgb(122,173,255)]">
+                        <div className="border-dashed border-2 w-[20rem] md:w-[32rem] flex flex-col items-center border-[rgb(122,173,255)]">
                             <img src={browse} alt="browse" className="w-[12rem]" />
                             <button className="bg-[rgb(122,173,255)] text-2xl text-white font-bold px-14 rounded-lg">Browse</button>
                             <div className="w-full border-2 text-left px-8 text-[rgb(122,173,255)] border-[rgb(122,173,255)] mt-6">Add Title for your content</div>

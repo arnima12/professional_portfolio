@@ -1,11 +1,10 @@
 import React from 'react';
-import calendar from '../../assets/calendar.png';
-import notification from '../../assets/notification.png';
-import profile from '../../assets/profile.png';
 import { BiRadioCircleMarked } from 'react-icons/bi';
 import { MdArrowRight, MdDelete } from 'react-icons/md';
+import { useDropdown } from './DropdownContext/DropdownContext';
 
-const DashboardRight = ({ isDropdownOpen }) => {
+const DashboardRight = () => {
+    const { isDropdownOpen } = useDropdown()
     const dashboardMenu = [
         { id: "1", img: "https://i.ibb.co/hLv67Nx/analytics.png" },
         { id: "2", img: "https://i.ibb.co/F3rtmB5/notification.png" },
@@ -48,7 +47,7 @@ const DashboardRight = ({ isDropdownOpen }) => {
             </div>
             <div className="flex items-center mx-4 mt-6">
                 <div className="dashboard-box h-[18rem] w-full">
-                    <div className="flex items-center gap-4 mx-2 text-xl font-semibold mt-4">
+                    <div className="flex items-center justify-between md:gap-4 mx-2 text-xl font-semibold mt-4">
                         <div>
                             <BiRadioCircleMarked className="text-white" />
                         </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './Dashboard.css';
 import { IoIosSearch } from 'react-icons/io';
 import { MdArrowRight } from 'react-icons/md';
@@ -8,15 +8,10 @@ import recycle from '../../assets/recycle.png';
 import DashboardLeft from './DashboardLeft';
 import DashboardRight from './DashboardRight';
 const Dashboard = () => {
-    const [isDropdownOpen, setIsDropdownOpen] = useState(true);
-    const toggleDropdown = () => {
-        setIsDropdownOpen(!isDropdownOpen);
-    };
-
     return (
         <div className="flex w-[100%] flex-col md:flex-row">
-            <DashboardLeft isDropdownOpen={isDropdownOpen} toggleDropdown={toggleDropdown} />
-            <div className="dashboard-center ml-8 mt-4 w-[90%] md:w-[60%]">
+            <DashboardLeft />
+            <div className={`dashboard-center ml-8 mt-4 w-[90%]  md:w-[60%]`}>
                 <div className="flex justify-between">
                     <div>
                         <h2 className="text-[rgb(27,66,124)] text-[48px] font-[700]">Hello User</h2>
@@ -70,7 +65,7 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-            <DashboardRight isDropdownOpen={isDropdownOpen} />
+            <DashboardRight />
         </div>
     );
 };
