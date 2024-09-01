@@ -11,6 +11,7 @@ import SignUp from "../../Pages/SignUp/SignUp";
 import SignIn from "../../Pages/SignIn/SignIn";
 import Dashboard from "../../Admin/Dashboard/Dashboard";
 import UploadProject from "../../Admin/Dashboard/UploadProject";
+import PersonalInfo from "../../Admin/Dashboard/PersonalInfo";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -59,8 +60,11 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/upload",
                 element: <UploadProject />,
-            }
-
+            },
+            {
+                path: "/dashboard/personalInfo",
+                element: <PersonalInfo />,
+            },
         ]
     }
 ])

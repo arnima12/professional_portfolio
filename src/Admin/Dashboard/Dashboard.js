@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Dashboard.css';
 import { IoIosSearch } from 'react-icons/io';
 import { MdArrowRight } from 'react-icons/md';

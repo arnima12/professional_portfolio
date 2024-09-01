@@ -36,3 +36,15 @@
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
     background: rgb(27, 66, 124);
 }
+
+.nameInput::placeholder {
+    color: rgb(17, 72, 153);
+    text-align: center;
+}
+
+.bioInput::placeholder {
+    color: rgb(102, 145, 214);
+    text-align: center;
+    width: 20rem;
+    height: 4rem
+}

@@ -8,7 +8,7 @@ const DashboardLeft = () => {
     const { isDropdownOpen, toggleDropdown } = useDropdown()
     const dashboardMenu = [
         { id: "1", img: "https://i.ibb.co/JF2QhYc/dashboard.png", title: "Dashboard", link: "/dashboard" },
-        { id: "2", img: "https://i.ibb.co/KV6tz41/personal.png", title: "Personal Info", link: "/dashboard" },
+        { id: "2", img: "https://i.ibb.co/KV6tz41/personal.png", title: "Personal Info", link: "/dashboard/personalInfo" },
         { id: "3", img: "https://i.ibb.co/DVm9vgJ/view.png", title: "View Projects", link: "/dashboard" },
         { id: "4", img: "https://i.ibb.co/jb4qW6P/analytics.png", title: "Analytics", link: "/dashboard" },
         { id: "5", img: "https://i.ibb.co/f9kXx3M/upload.png", title: "Upload Projects", link: `/dashboard/upload?dropdown=${isDropdownOpen}` },
