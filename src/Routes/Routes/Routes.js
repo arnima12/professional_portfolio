@@ -12,6 +12,7 @@ import SignIn from "../../Pages/SignIn/SignIn";
 import Dashboard from "../../Admin/Dashboard/Dashboard";
 import UploadProject from "../../Admin/Dashboard/UploadProject";
 import PersonalInfo from "../../Admin/Dashboard/PersonalInfo";
+import Settings from "../../Admin/Dashboard/Settings";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/personalInfo",
                 element: <PersonalInfo />,
+            },
+            {
+                path: "/dashboard/settings",
+                element: <Settings />,
             },
         ]
     }

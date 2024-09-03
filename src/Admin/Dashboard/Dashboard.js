@@ -10,7 +10,7 @@ import DashboardRight from './DashboardRight';
 const Dashboard = () => {
     return (
         <div className="flex w-[100%] flex-col md:flex-row">
-            <DashboardLeft />
+            <DashboardLeft paddingBottom="16.5rem" />
             <div className={`dashboard-center ml-8 mt-4 w-[90%]  md:w-[60%]`}>
                 <div className="flex justify-between">
                     <div>

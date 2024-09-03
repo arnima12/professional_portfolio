@@ -38,8 +38,8 @@ const PersonalInfo = () => {
 
     return (
         <div className="flex w-[100%] flex-col md:flex-row">
-            <DashboardLeft />
-            <div className={"mx-8 mt-4 w-[100%] md:w-[90%]"}>
+            <DashboardLeft paddingBottom="48rem" />
+            <div className={"mx-8 my-4 w-[100%] md:w-[80%]"}>
                 <div className="flex justify-between items-center">
                     <div>
                         <h2 className="text-[rgb(27,66,124)] text-[48px] font-[700]">Personal Info</h2>
@@ -88,9 +88,9 @@ const PersonalInfo = () => {
                                 </div>
                             </div>
                             <div className="mt-4 mb-2">
-                                <input type="text" placeholder="Enter your name" className="bg-[rgb(210,227,255)] rounded-lg py-2 w-[24rem] nameInput" />
+                                <input type="text" placeholder="Enter your name" className="bg-[rgb(210,227,255)] rounded-lg py-2 w-[20rem] nameInput" />
                                 <br />
-                                <input type="text" placeholder="Write a short bio about yourself" className="rounded-lg py-1 px-4 w-[24rem] h-[18rem] mt-4 bioInput border-[rgb(210,227,255)] border-2" />
+                                <input type="text" placeholder="Write a short bio about yourself" className="rounded-lg py-1 px-4 w-[20rem] h-[18rem] mt-4 bioInput border-[rgb(210,227,255)] border-2" />
 
                             </div>
                         </div>
@@ -99,7 +99,7 @@ const PersonalInfo = () => {
                         <div className="flex justify-around mx-4">
                             <div className="form-group">
                                 <label for="gender" className="bg-[rgb(210,227,255)] w-[7rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">Gender</label>
-                                <select type="text" id="gender" name="gender" className="border-[rgb(210,227,255)] text-[rgb(17,72,153)] h-[3rem] border-2 w-[20rem] rounded-lg">
+                                <select type="text" id="gender" name="gender" className="border-[rgb(210,227,255)] text-[rgb(17,72,153)] h-[3rem] border-2 w-[18rem] rounded-lg">
                                     <option className="text-[rgb(102,145,214)]">Select your gender</option>
                                     <option>Female</option>
                                     <option>Male</option>
@@ -107,12 +107,12 @@ const PersonalInfo = () => {
                             </div>
                             <div className="form-group ml-4">
                                 <label for="dob" className="bg-[rgb(210,227,255)] w-[7rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">Date of Birth</label>
-                                <input type="date" id="dob" name="dob" className="border-[rgb(210,227,255)] p-2 rounded-lg text-[rgb(17,72,153)] h-[3rem] border-2 w-[20rem]" />
+                                <input type="date" id="dob" name="dob" className="border-[rgb(210,227,255)] p-2 rounded-lg text-[rgb(17,72,153)] h-[3rem] border-2 w-[18rem]" />
                             </div>
 
                             <div className="form-group ml-4">
                                 <label for="gender" className="bg-[rgb(210,227,255)] w-[7rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">Gender</label>
-                                <select type="text" id="gender" name="gender" className="border-[rgb(210,227,255)] h-[3rem] border-2 w-[20rem] rounded-lg">
+                                <select type="text" id="gender" name="gender" className="border-[rgb(210,227,255)] h-[3rem] border-2 w-[18rem] rounded-lg">
                                     <option disabled selected className="text-[rgb(102,145,214)]">Select your gender</option>
                                     <option>Female</option>
                                     <option>Male</option>
@@ -122,7 +122,7 @@ const PersonalInfo = () => {
                         <div className="flex justify-around mx-4">
                             <div className="form-group">
                                 <label for="profession" className="bg-[rgb(210,227,255)] w-[7rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">Profession</label>
-                                <select type="text" id="profession" name="profession" className="border-[rgb(210,227,255)] text-[rgb(17,72,153)] h-[3rem] border-2 w-[20rem] rounded-lg">
+                                <select type="text" id="profession" name="profession" className="border-[rgb(210,227,255)] text-[rgb(17,72,153)] h-[3rem] border-2 w-[18rem] rounded-lg">
                                     <option disabled selected>Select your profession</option>
                                     <option value="accountant">Accountant</option>
                                     <option value="architect">Architect</option>
@@ -147,22 +147,22 @@ const PersonalInfo = () => {
                             </div>
                             <div className="form-group ml-4">
                                 <label for="email" className="bg-[rgb(210,227,255)] w-[7rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">Email</label>
-                                <input type="email" id="email" name="email" className="border-[rgb(210,227,255)] p-2 rounded-lg text-[rgb(17,72,153)] h-[3rem] border-2 w-[20rem]" placeholder="Enter your email" />
+                                <input type="email" id="email" name="email" className="border-[rgb(210,227,255)] p-2 rounded-lg text-[rgb(17,72,153)] h-[3rem] border-2 w-[18rem]" placeholder="Enter your email" />
                             </div>
                             <div className="form-group ml-4">
                                 <label for="linkedin" className="bg-[rgb(210,227,255)] w-[7rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">Linkedin</label>
-                                <input type="linkedin" id="linkedin" name="linkedin" className="border-[rgb(210,227,255)] p-2 rounded-lg text-[rgb(17,72,153)] h-[3rem] border-2 w-[20rem]" placeholder="Enter your linkedin" />
+                                <input type="linkedin" id="linkedin" name="linkedin" className="border-[rgb(210,227,255)] p-2 rounded-lg text-[rgb(17,72,153)] h-[3rem] border-2 w-[18rem]" placeholder="Enter your linkedin" />
                             </div>
 
                         </div>
-                        <div className="flex gap-[0.4rem] w-[42rem]">
+                        <div className="flex gap-[0.2rem] w-[36rem]">
                             <div className="form-group ml-4">
                                 <label for="facebook" className="bg-[rgb(210,227,255)] w-[7rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">Facebook</label>
-                                <input type="facebook" id="facebook" name="facebook" className="border-[rgb(210,227,255)] p-2 rounded-lg text-[rgb(17,72,153)] h-[3rem] border-2 w-[20rem]" placeholder="Enter your facebook" />
+                                <input type="facebook" id="facebook" name="facebook" className="border-[rgb(210,227,255)] p-2 rounded-lg text-[rgb(17,72,153)] h-[3rem] border-2 w-[18rem]" placeholder="Enter your facebook" />
                             </div>
                             <div className="form-group ml-4">
                                 <label for="youtube" className="bg-[rgb(210,227,255)] w-[7rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">Youtube</label>
-                                <input type="youtube" id="youtube" name="youtube" className="border-[rgb(210,227,255)] p-2 rounded-lg text-[rgb(17,72,153)] h-[3rem] border-2 w-[20rem]" placeholder="Enter your youtube" />
+                                <input type="youtube" id="youtube" name="youtube" className="border-[rgb(210,227,255)] p-2 rounded-lg text-[rgb(17,72,153)] h-[3rem] border-2 w-[18rem]" placeholder="Enter your youtube" />
                             </div>
                         </div>
                         <div className="mx-4">
@@ -171,26 +171,72 @@ const PersonalInfo = () => {
                         </div>
                     </div>
                 </div>
-                <div>
+                <div className="flex gap-4">
                     <div className="w-[40%] border-2 border-[rgb(27,66,124)] rounded-[1rem] py-4 mt-8 mb-8">
                         <div className="mx-3 text-left text-[rgb(17,72,153)] text-[32px] mb-4 font-semibold">Education</div>
                         <div className="flex flex-col items-center mx-4">
                             <div className="form-group">
                                 <label for="degree" className="bg-[rgb(210,227,255)] w-[12rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">Course/Degree</label>
-                                <input type="text" id="degree" name="degree" className="border-[rgb(210,227,255)] text-[rgb(17,72,153)] h-[3rem] border-2 w-[34rem] rounded-lg px-2" placeholder="Enter your course details" />
+                                <input type="text" id="degree" name="degree" className="border-[rgb(210,227,255)] text-[rgb(17,72,153)] h-[3rem] border-2 w-[30rem] rounded-lg px-2" placeholder="Enter your course details" />
                             </div>
                             <div className="form-group">
                                 <label for="school" className="bg-[rgb(210,227,255)] w-[12rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">School/University</label>
-                                <input type="text" id="school" name="school" className="border-[rgb(210,227,255)] text-[rgb(17,72,153)] h-[3rem] border-2 w-[34rem] rounded-lg px-2" placeholder="Enter your school details" />
+                                <input type="text" id="school" name="school" className="border-[rgb(210,227,255)] text-[rgb(17,72,153)] h-[3rem] border-2 w-[30rem] rounded-lg px-2" placeholder="Enter your school details" />
                             </div>
                             <div className="form-group">
                                 <label for="grades" className="bg-[rgb(210,227,255)] w-[12rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">Grades</label>
-                                <input type="text" id="grades" name="grades" className="border-[rgb(210,227,255)] text-[rgb(17,72,153)] h-[3rem] border-2 w-[34rem] rounded-lg px-2" placeholder="Enter your grades" />
+                                <input type="text" id="grades" name="grades" className="border-[rgb(210,227,255)] text-[rgb(17,72,153)] h-[3rem] border-2 w-[30rem] rounded-lg px-2" placeholder="Enter your grades" />
                             </div>
                             <div className="form-group">
                                 <label for="year" className="bg-[rgb(210,227,255)] w-[12rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">Year</label>
-                                <input type="text" id="year" name="year" className="border-[rgb(210,227,255)] text-[rgb(17,72,153)] h-[3rem] border-2 w-[34rem] rounded-lg px-2" placeholder="Enter your starting 7 passing year" />
+                                <input type="text" id="year" name="year" className="border-[rgb(210,227,255)] text-[rgb(17,72,153)] h-[3rem] border-2 w-[30rem] rounded-lg px-2" placeholder="Enter your starting 7 passing year" />
                             </div>
+                            <div className="w-full">
+                                <div className="flex justify-between mx-2">
+                                    <div className="bg-[rgb(48,58,107)] px-2 text-white rounded-lg w-[6rem] flex items-center justify-between">
+                                        <button>
+                                            Remove
+                                        </button>
+                                        <CiCircleMinus className="text-[1rem]" />
+                                    </div>
+                                    <div className="bg-[rgb(122,173,255)] px-2 text-white rounded-lg w-[6rem] flex items-center justify-between">
+                                        <button>
+                                            Add
+                                        </button>
+                                        <CiCirclePlus />
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="w-[60%] border-2 border-[rgb(27,66,124)] rounded-[1rem] py-4 mt-8 mb-8">
+                        <div className="mx-3 text-left text-[rgb(17,72,153)] text-[32px] mb-4 font-semibold">Experience</div>
+                        <div className="flex mx-4 justify-around">
+                            <div className="form-group">
+                                <label for="company" className="bg-[rgb(210,227,255)] w-[9rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">Company Name</label>
+                                <input type="text" id="company" name="company" className="border-[rgb(210,227,255)] text-[rgb(17,72,153)] h-[3rem] border-2 w-[23rem] rounded-lg px-2" placeholder="Enter your company name" />
+                            </div>
+                            <div className="form-group">
+                                <label for="job" className="bg-[rgb(210,227,255)] w-[9rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">Job Title</label>
+                                <input type="text" id="job" name="job" className="border-[rgb(210,227,255)] text-[rgb(17,72,153)] h-[3rem] border-2 w-[23rem] rounded-lg px-2" placeholder="Enter your designation" />
+                            </div>
+                        </div>
+                        <div className="flex mx-4 justify-around">
+                            <div className="form-group">
+                                <label for="start" className="bg-[rgb(210,227,255)] w-[9rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">Start Date</label>
+                                <input type="text" id="start" name="start" className="border-[rgb(210,227,255)] text-[rgb(17,72,153)] h-[3rem] border-2 w-[23rem] rounded-lg px-2" placeholder="Enter your joining date" />
+                            </div>
+                            <div className="form-group">
+                                <label for="end" className="bg-[rgb(210,227,255)] w-[9rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">End Date/Ongoing</label>
+                                <input type="text" id="end" name="end" className="border-[rgb(210,227,255)] text-[rgb(17,72,153)] h-[3rem] border-2 w-[23rem] rounded-lg px-2" placeholder="Enter your job status" />
+                            </div>
+                        </div>
+                        <div className="form-group mx-6">
+                            <label for="details" className="bg-[rgb(210,227,255)] w-[9rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">Details</label>
+                            <input type="text" id="details" name="details" className="border-[rgb(210,227,255)] text-[rgb(17,72,153)] h-[8rem] border-2 w-full rounded-lg px-2" placeholder="Write in detail about your work and experience in the company......" />
+                        </div>
+                        <div className="mx-2">
                             <div className="w-full">
                                 <div className="flex justify-between mx-4">
                                     <div className="bg-[rgb(48,58,107)] px-2 text-white rounded-lg w-[6rem] flex items-center justify-between">
@@ -209,9 +255,13 @@ const PersonalInfo = () => {
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
+                </div>
+                <div>
+                    <div className="flex justify-end mr-2">
+                        <button className="bg-[rgb(125,225,248)] text-[rgb(13,16,89)] text-[36px] font-[500] py-2 border-2 rounded-lg border-[rgb(17,72,153)] px-6">Update</button>
+                    </div>
+
                 </div>
             </div>
         </div >

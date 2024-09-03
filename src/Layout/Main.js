@@ -6,7 +6,7 @@ const Main = () => {
     const location = useLocation();
     return (
         <div>
-            {location.pathname !== '/signUp' && location.pathname !== '/signIn' && location.pathname !== '/dashboard' && location.pathname !== '/dashboard/upload' && <Navbar />}
+            {location.pathname !== '/signUp' && location.pathname !== '/signIn' && location.pathname !== '/dashboard' && location.pathname !== '/dashboard/upload' && location.pathname !== '/dashboard/personalInfo' && location.pathname !== '/dashboard/settings' && <Navbar />}
 
             <Outlet />
         </div>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { IoMdMenu } from "react-icons/io";
 import { useDropdown } from './DropdownContext/DropdownContext';
 
-const DashboardLeft = () => {
+const DashboardLeft = ({ paddingBottom }) => {
     const { isDropdownOpen, toggleDropdown } = useDropdown()
     const dashboardMenu = [
         { id: "1", img: "https://i.ibb.co/JF2QhYc/dashboard.png", title: "Dashboard", link: "/dashboard" },
@@ -12,13 +12,17 @@ const DashboardLeft = () => {
         { id: "3", img: "https://i.ibb.co/DVm9vgJ/view.png", title: "View Projects", link: "/dashboard" },
         { id: "4", img: "https://i.ibb.co/jb4qW6P/analytics.png", title: "Analytics", link: "/dashboard" },
         { id: "5", img: "https://i.ibb.co/f9kXx3M/upload.png", title: "Upload Projects", link: `/dashboard/upload?dropdown=${isDropdownOpen}` },
-        { id: "6", img: "https://i.ibb.co/xqCSpPj/settings.png", title: "Settings", link: "/dashboard" },
+        { id: "6", img: "https://i.ibb.co/xqCSpPj/settings.png", title: "Settings", link: "/dashboard/settings" },
         { id: "7", img: "https://i.ibb.co/R061XFx/logout.png", title: "Logout", link: "/dashboard" },
     ];
 
     return (
         <div
-            className={`dashboard-left transition-all duration-100 px-6 ${isDropdownOpen ? 'h-[50rem] w-[100%]' : 'h-[4rem] w-[100%]'} ${isDropdownOpen ? 'md:pb-[16.5rem] md:w-[20%] md:h-[100%]' : 'md:pb-[16.5rem] md:w-[6%] md:h-[100%]'} `}
+            className={`dashboard-left transition-all duration-100 px-6 ${isDropdownOpen
+                ? `h-[50rem] w-[100%] md:w-[20%] md:h-[100%]`
+                : `h-[4rem] w-[100%] md:w-[6%] md:h-[100%]`
+                }`}
+            style={{ paddingBottom: isDropdownOpen ? paddingBottom : paddingBottom }}
         >
             <div className="mt-4 flex items-center justify-between">
                 {isDropdownOpen ? (
