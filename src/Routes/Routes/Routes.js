@@ -13,6 +13,7 @@ import Dashboard from "../../Admin/Dashboard/Dashboard";
 import UploadProject from "../../Admin/Dashboard/UploadProject";
 import PersonalInfo from "../../Admin/Dashboard/PersonalInfo";
 import Settings from "../../Admin/Dashboard/Settings";
+import AdminRoute from "../AdminRoute/AdminRoute";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -56,19 +57,19 @@ const router = createBrowserRouter([
             },
             {
                 path: "/dashboard",
-                element: <Dashboard />,
+                element: <Dashboard />
             },
             {
                 path: "/dashboard/upload",
-                element: <UploadProject />,
+                element: <AdminRoute><UploadProject /></AdminRoute>,
             },
             {
                 path: "/dashboard/personalInfo",
-                element: <PersonalInfo />,
+                element: <AdminRoute><PersonalInfo /></AdminRoute>,
             },
             {
                 path: "/dashboard/settings",
-                element: <Settings />,
+                element: <AdminRoute><Settings /></AdminRoute>,
             },
         ]
     }

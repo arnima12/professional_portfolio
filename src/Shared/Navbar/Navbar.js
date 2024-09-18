@@ -1,19 +1,34 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import logo from "../../assets/logo.png";
 import { Link } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 import './Navbar.css';
+import { AuthContext } from '../../context/AuthProvider';
 
 const Navbar = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+    const { currentUser } = useContext(AuthContext);
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
-    };
+    }
+    const [userData, setUserData] = useState(null);
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await fetch('http://localhost:8000/users'); // Adjust the API endpoint as necessary
+                const users = await response.json();
+                const currentUserData = users.find(user => user.email === currentUser.email);
+                setUserData(currentUserData);
+                console.log("userData", userData)
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
 
+        fetchUserData();
+    }, []);
     const menuItems = [
         { id: 1, title: "Home", link: "/" },
-        { id: 2, title: "Dashboard", link: "/dashboard" },
         { id: 4, title: "Gallery", link: "/photo" },
         { id: 5, title: "Video", link: "/video" },
         { id: 6, title: "News", link: "/news" },
@@ -24,7 +39,11 @@ const Navbar = () => {
         <div className="navbar shadow-md bg-white py-4">
             <div className="navbar-start">
                 <Link to="/" className="btn btn-ghost text-xl">
-                    <img src={logo} alt="logo" />
+                    {userData && userData.image ? (
+                        <img src={userData.image} alt="User Logo" className="w-10 h-10 rounded-full" />
+                    ) : (
+                        <p>Loading logo...</p>
+                    )}
                 </Link>
                 <div className="dropdown">
                     <label
@@ -81,10 +100,16 @@ const Navbar = () => {
                     ))}
                 </ul>
             </div>
-            <div className="navbar-end">
-                <Link to="/signUp" className="font-bold text-2xl hover:bg-gradient-to-r from-blue-700 via-blue-400 to-blue-200 hover:text-white rounded-lg px-4 py-2 mr-20">
-                    Sign Up
-                </Link>
+            <div className="navbar-end mr-10">
+                {!currentUser ? (
+                    <Link to="/signUp" className="font-bold text-2xl hover:bg-gradient-to-r from-blue-700 via-blue-400 to-blue-200 hover:text-white rounded-lg px-4 py-2 mr-20">
+                        Sign Up
+                    </Link>
+                ) : (
+                    <Link to="/dashboard" className="font-bold text-2xl hover:bg-gradient-to-r from-blue-700 via-blue-400 to-blue-200 hover:text-white rounded-lg px-4 py-2 mr-20">
+                        Dashboard
+                    </Link>
+                )}
             </div>
         </div>
     );

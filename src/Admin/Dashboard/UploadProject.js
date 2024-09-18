@@ -6,7 +6,7 @@ import browse from "../../assets/browse.png";
 const UploadProject = () => {
     return (
         <div className="flex flex-col md:flex-row">
-            <DashboardLeft />
+            <DashboardLeft paddingBottom="16.5rem" />
             <div className="center ml-8 mt-4 w-[90%] md:w-[60%]">
                 <div className="flex justify-between">
                     <div>
