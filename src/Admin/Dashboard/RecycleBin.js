@@ -53,7 +53,7 @@ const RecycleBin = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    image: item.image, // or item.video depending on the type
+                    image: item.image,
                     title: item.title
                 }),
             });
@@ -61,7 +61,6 @@ const RecycleBin = () => {
             if (!response.ok) {
                 throw new Error(`Error: ${response.statusText}`);
             }
-            // Remove the deleted item from the local state
             setDeletedItems(prevItems => prevItems.filter((_, i) => i !== index));
         } catch (error) {
             setError(error.message);

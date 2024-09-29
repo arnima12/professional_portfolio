@@ -40,7 +40,6 @@ const Dashboard = () => {
         console.log("cur", currentReach);
         if (previousReach > 0) {
             const increased = ((currentReach - previousReach) / previousReach);
-            // const cappedPercentage = Math.min(change, 100);
             setPercentageIncrease(increased.toFixed(0));
         }
     }, [currentReach, previousReach]);
