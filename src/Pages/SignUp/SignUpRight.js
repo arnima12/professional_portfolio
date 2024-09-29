@@ -5,6 +5,7 @@ import mail from "../../assets/mail.png";
 import facebookLogo from "../../assets/facebook.png";
 import { AuthContext } from '../../context/AuthProvider';
 import { FacebookAuthProvider } from 'firebase/auth/web-extension';
+import { sendEmailVerification } from 'firebase/auth'; // Import the function
 
 const SignUpRight = () => {
     const { signup, updateUser, facebook } = useContext(AuthContext);
@@ -17,7 +18,8 @@ const SignUpRight = () => {
 
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-    const [createdUserEmail, setCreatedUserEmail] = useState('')
+    const [createdUserEmail, setCreatedUserEmail] = useState('');
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -34,20 +36,19 @@ const SignUpRight = () => {
         }
 
         signup(formData.email, formData.password)
-            .then(result => {
+            .then(async (result) => {
                 const user = result.user;
                 console.log("user", user);
                 const userInfo = {
                     displayName: formData.name
                 };
-                console.log("userInfo", userInfo);
-                updateUser(userInfo)
-                    .then(() => {
-                        saveUser(formData.name, formData.email);
 
-                    })
-                    .catch(err => console.log(err));
-                setSuccess("Sign-up successful!");
+                console.log("userInfo", userInfo);
+                await updateUser(userInfo);
+                await sendEmailVerification(user); // Send verification email
+
+                saveUser(formData.name, formData.email);
+                setSuccess("Sign-up successful! Please verify your email.");
                 setError('');
                 setFormData({
                     name: '',
@@ -55,18 +56,17 @@ const SignUpRight = () => {
                     password: '',
                     confirmPassword: ''
                 });
-                setSuccess('');
             })
             .catch(error => {
                 console.log(error.message);
                 setError("Failed to sign up. Please try again.");
                 setSuccess('');
             });
-
     };
+
     const saveUser = (name, email) => {
         const user = { name, email };
-        console.log("user", user)
+        console.log("user", user);
         fetch('http://localhost:8000/users', {
             method: 'POST',
             headers: {
@@ -78,15 +78,14 @@ const SignUpRight = () => {
             .then(data => {
                 console.log('User saved:', data);
                 setCreatedUserEmail(email);
-
             })
             .catch(error => console.error('Error saving user:', error));
     };
+
     const facebookSignUp = (e) => {
         console.log("facebook", e);
         facebook()
             .then((result) => {
-                // The signed-in user info.
                 if (result && result.user) {
                     const user = result.user;
                     const credential = FacebookAuthProvider.credentialFromResult(result);
@@ -98,17 +97,16 @@ const SignUpRight = () => {
                 }
             })
             .catch((error) => {
-                // Handle Errors here.
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                // The email of the user's account used.
+
                 const email = error?.customData?.email;
-                // The AuthCredential type that was used.
                 const credential = FacebookAuthProvider.credentialFromError(error);
 
                 console.error(`Error ${errorCode}: ${errorMessage}`);
             });
     };
+
     return (
         <div className="w-[80%] lg:w-[40%] signUp-right h-[60rem] pt-10 lg:rounded-tl-[0px] lg:rounded-bl-[0px] lg:rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px]">
             <h1 className="text-[rgb(122,173,255)] text-[50px] font-[700]">Create Account</h1>

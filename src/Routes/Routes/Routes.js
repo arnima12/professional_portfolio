@@ -14,37 +14,41 @@ import UploadProject from "../../Admin/Dashboard/UploadProject";
 import PersonalInfo from "../../Admin/Dashboard/PersonalInfo";
 import Settings from "../../Admin/Dashboard/Settings";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import MyProject from "../../Admin/Dashboard/MyProject";
+import RecycleBin from "../../Admin/Dashboard/RecycleBin";
+import Drafts from "../../Admin/Dashboard/Drafts";
+import Analytics from "../../Admin/Dashboard/Analytics";
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Main />,
         children: [
             {
-                path: "/",
+                path: ":email/",
                 element: <Home />,
             },
             {
-                path: "/photo",
+                path: ":email/photo",
                 element: <AllPhotos />,
             },
             {
-                path: "/allBlog",
+                path: ":email/allBlog",
                 element: <AllBlogs />,
             },
             {
-                path: "/blog/:id",
+                path: ":email/blog/:id",
                 element: <LatestBlogPage />,
             },
             {
-                path: "/news",
+                path: ":email/news",
                 element: <AllNews />,
             },
             {
-                path: "/news/:id",
+                path: ":email/news/:id",
                 element: <NewsPage />,
             },
             {
-                path: "/video",
+                path: ":email/video",
                 element: <AllVideos />,
             },
             {
@@ -64,13 +68,29 @@ const router = createBrowserRouter([
                 element: <AdminRoute><UploadProject /></AdminRoute>,
             },
             {
+                path: "/dashboard/recycle",
+                element: <AdminRoute><RecycleBin /></AdminRoute>,
+            },
+            {
+                path: "/dashboard/draft",
+                element: <AdminRoute><Drafts /></AdminRoute>,
+            },
+            {
+                path: "/dashboard/myProject",
+                element: <AdminRoute><MyProject /></AdminRoute>,
+            },
+            {
                 path: "/dashboard/personalInfo",
                 element: <AdminRoute><PersonalInfo /></AdminRoute>,
             },
             {
+                path: "/dashboard/analytics",
+                element: <AdminRoute><Analytics /></AdminRoute>,
+            },
+            {
                 path: "/dashboard/settings",
                 element: <AdminRoute><Settings /></AdminRoute>,
-            },
+            }
         ]
     }
 ])

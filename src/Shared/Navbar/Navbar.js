@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
-import logo from "../../assets/logo.png";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 import './Navbar.css';
 import { AuthContext } from '../../context/AuthProvider';
-
+import logo from "../../assets/logo.png";
 const Navbar = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const { currentUser } = useContext(AuthContext);
+    const { email } = useParams();
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     }
@@ -15,9 +15,9 @@ const Navbar = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await fetch('http://localhost:8000/users'); // Adjust the API endpoint as necessary
+                const response = await fetch('http://localhost:8000/users');
                 const users = await response.json();
-                const currentUserData = users.find(user => user.email === currentUser.email);
+                const currentUserData = users.find(user => user.email === email);
                 setUserData(currentUserData);
                 console.log("userData", userData)
             } catch (error) {
@@ -28,21 +28,21 @@ const Navbar = () => {
         fetchUserData();
     }, []);
     const menuItems = [
-        { id: 1, title: "Home", link: "/" },
-        { id: 4, title: "Gallery", link: "/photo" },
-        { id: 5, title: "Video", link: "/video" },
-        { id: 6, title: "News", link: "/news" },
-        { id: 8, title: "Blog", link: "/allBlog" }
+        { id: 1, title: "Home", link: `${email}/` },
+        { id: 4, title: "Gallery", link: `${email}/photo` },
+        { id: 5, title: "Video", link: `${email}/video` },
+        { id: 6, title: "News", link: `${email}/news` },
+        { id: 8, title: "Blog", link: `${email}/allBlog` }
     ];
 
     return (
         <div className="navbar shadow-md bg-white py-4">
             <div className="navbar-start">
                 <Link to="/" className="btn btn-ghost text-xl">
-                    {userData && userData.image ? (
-                        <img src={userData.image} alt="User Logo" className="w-10 h-10 rounded-full" />
+                    {userData && userData.logo ? (
+                        <img src={userData.logo} alt="User Logo" className="w-10 h-10 rounded-full" />
                     ) : (
-                        <p>Loading logo...</p>
+                        <img src={logo} alt="User Logo" className="w-10 h-10 rounded-full" />
                     )}
                 </Link>
                 <div className="dropdown">

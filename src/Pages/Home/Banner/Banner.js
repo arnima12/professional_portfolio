@@ -3,19 +3,20 @@ import "./Banner.css";
 import logo from "../../../assets/logo.png";
 import clientPhoto from "../../../assets/banner.png"
 import { FaPlayCircle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Sidebar from '../../../Shared/Sidebar/Sidebar';
 import 'animate.css';
 import { AuthContext } from '../../../context/AuthProvider';
 const Banner = () => {
     const { currentUser } = useContext(AuthContext);
     const [userData, setUserData] = useState(null);
+    const { email } = useParams();
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await fetch('http://localhost:8000/users'); // Adjust the API endpoint as necessary
+                const response = await fetch('http://localhost:8000/users');
                 const users = await response.json();
-                const currentUserData = users.find(user => user.email === currentUser.email);
+                const currentUserData = users.find(user => user.email === email);
                 setUserData(currentUserData);
                 console.log("userData", userData)
             } catch (error) {
@@ -24,17 +25,17 @@ const Banner = () => {
         };
 
         fetchUserData();
-    }, []);
+    }, [email]);
     return (
         <div className="flex gap-0">
             <div className="flex shadow-md bg-white h-[50rem] w-full lg:w-[98%]" id="banner">
                 <div className=" w-[60%] md:w-[40%]">
                     <div className="bg-[url('/src/assets/banner-bg.png')] bg-cover bg-center px-6 lg:px-20 py-6 h-[50rem]">
                         <div>
-                            {userData && userData.image ? (
-                                <img src={userData.image} alt="User Logo" className="w-10 h-10 rounded-full" />
+                            {userData && userData.logo ? (
+                                <img src={userData.logo} alt="User Logo" className="w-10 h-10 rounded-full" />
                             ) : (
-                                <p>Loading logo...</p>
+                                <img src={logo} alt="User Logo" className="w-10 h-10 rounded-full" />
                             )}
                         </div>
                         <div className="text-left w-[16rem] md:w-[24rem] lg:w-[42rem] absolute z-1 flex flex-col justify-center h-[70%]">
@@ -74,13 +75,13 @@ const Banner = () => {
                         <div className="bg-white flex w-full py-6">
                             <div className="font-bolder text-7xl flex justify-start text-[rgb(30,81,153)] mt-4">-</div>
                             {userData && userData.experience && userData.experience.length > 0 ? (
-                                userData.experience.map((exp, index) => (
-                                    <div key={index} className="mt-4">
-                                        {exp.jobTitle} <br /> {exp.companyName}</div>
-                                ))
+                                <div className="mt-4">
+                                    {userData.experience[0].jobTitle} <br /> {userData.experience[0].companyName}
+                                </div>
                             ) : (
                                 <div className="mt-4">
-                                    CHIEF EXECUTIVE OFFICER <br /> IFIC BANK LIMITED</div>
+                                    CHIEF EXECUTIVE OFFICER <br /> IFIC BANK LIMITED
+                                </div>
                             )}
                         </div>
                     </div>

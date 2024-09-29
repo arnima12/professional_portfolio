@@ -1,37 +1,93 @@
-import React from 'react';
-import Video from './Video';
-import './Videos.css'
-const Videos = () => {
-    const videos = [
-        {
-            "id": "1",
-            "img": "https://i.ibb.co/0ynZCm2/download-1.jpg",
-            "link": "https://www.youtube.com/"
-        },
-        {
-            "id": "2",
-            "img": "https://i.ibb.co/0ynZCm2/download-1.jpg",
-            "link": "https://www.youtube.com/"
-        },
-        {
-            "id": "3",
-            "img": "https://i.ibb.co/0ynZCm2/download-1.jpg",
-            "link": "https://www.youtube.com/"
-        },
-    ]
-    return (
-        <div className="bg-[rgb(42,51,68)] px-8 pt-4 pb-8 mt-24 video-section">
-            <div className="flex flex-row items-center gap-4">
-                <div className="bg-[rgb(42,193,235)] w-[3rem] h-[0.5rem]"></div>
-                <div className="text-[rgb(80,22,203)] text-[50px] md:text-[64px] font-bold">Videos</div>
+import React, { useEffect, useState } from 'react';
+import Video from "./Video"
+import { useParams } from 'react-router-dom';
 
-            </div>
-            <p className="text-left text-white font-[500] text-[24px]">All of my videos from internet and YouTube.</p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12">
-                {videos.map((video) => <Video key={video.id} video={video}></Video>)}
-            </div>
-            <div>
-                <button className="video-btn shadow-md bg-[rgb(47,94,163)] py-2 px-4 text-white font-bold">View More</button>
+const Videos = () => {
+    const [allVideos, setAllVideos] = useState([]);
+    const [error, setError] = useState(null);
+    const { email } = useParams();
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                if (email && email !== 'undefined') {
+                    const response = await fetch(`http://localhost:8000/users/${email}/video`);
+                    const contentType = response.headers.get('content-type');
+                    if (!response.ok) {
+                        throw new Error(`Error: ${response.statusText}`);
+                    }
+
+                    if (contentType && contentType.includes('application/json')) {
+                        const data = await response.json();
+                        setAllVideos(data.videos);
+                    } else {
+                        throw new Error('Received non-JSON response');
+                    }
+                } else {
+                    const demoVideos = [
+                        {
+                            "id": "1",
+                            "video": "https://youtu.be/R5LAPvUKGvc?si=XxoIqkgCUYoiJq8_",
+                            "title": "Hello demo"
+                        },
+                        {
+                            "id": "2",
+                            "video": "https://youtu.be/R5LAPvUKGvc?si=XxoIqkgCUYoiJq8_",
+                            "title": "Hello demo"
+                        },
+                        {
+                            "id": "3",
+                            "video": "https://youtu.be/R5LAPvUKGvc?si=XxoIqkgCUYoiJq8_",
+                            "title": "Hello demo"
+                        },
+                        {
+                            "id": "4",
+                            "video": "https://youtu.be/R5LAPvUKGvc?si=XxoIqkgCUYoiJq8_",
+                            "title": "Hello demo"
+                        },
+                        {
+                            "id": "5",
+                            "video": "https://youtu.be/R5LAPvUKGvc?si=XxoIqkgCUYoiJq8_",
+                            "title": "Hello demo"
+                        },
+                        {
+                            "id": "6",
+                            "video": "https://youtu.be/R5LAPvUKGvc?si=XxoIqkgCUYoiJq8_",
+                            "title": "Hello demo"
+                        },
+                        {
+                            "id": "7",
+                            "video": "https://youtu.be/R5LAPvUKGvc?si=XxoIqkgCUYoiJq8_",
+                            "title": "Hello demo"
+                        },
+                        {
+                            "id": "8",
+                            "video": "https://youtu.be/R5LAPvUKGvc?si=XxoIqkgCUYoiJq8_",
+                            "title": "Hello demo"
+                        },
+                    ];
+                    setAllVideos(demoVideos);
+                }
+            } catch (error) {
+                setError(error.message);
+            }
+        };
+        fetchUserData();
+    }, [email]);
+
+    return (
+        <div>
+            <div className="flex flex-col items-center px-12">
+                <div className="flex flex-row items-center gap-4">
+                    <div className="bg-[rgb(42,193,235)] w-[3rem] h-[0.5rem]"></div>
+                    <div className="text-[rgb(30,81,153)] text-[64px] font-bold">All Videos</div>
+                    <div className="bg-[rgb(42,193,235)] w-[3rem] h-[0.5rem]"></div>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[4rem] mt-12 mb-8">
+                    {
+                        allVideos.slice(0, 5).map((videos) => <Video key={videos.id} videos={videos}></Video>)
+                    }
+                </div>
             </div>
         </div>
     );

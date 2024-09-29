@@ -1,23 +1,30 @@
-import React, { useContext, useState } from 'react';
-import axios from 'axios';
+import React, { useContext, useState, useEffect } from 'react';
 import SignUpLeft from '../SignUp/SignUpLeft';
 import SignUpRight from '../SignUp/SignUpRight';
 import './SignIn.css';
 import { AuthContext } from '../../context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
+import useToken from '../../hooks/useToken';
 
 const SignIn = () => {
     const { signIn } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
-    const [loginUserEmail, setLoginUserEmail] = useState('');
     const [success, setSuccess] = useState('');
+    const [loginUserEmail, setLoginUserEmail] = useState('');
+    const [token] = useToken(loginUserEmail);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        name: '',
         email: '',
-        password: '',
-        confirmPassword: ''
+        password: ''
     });
+
+    useEffect(() => {
+        if (token) {
+            console.log("JWT Token received:", token);
+            navigate('/dashboard');
+        }
+    }, [token, navigate]);
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -25,22 +32,26 @@ const SignIn = () => {
             [name]: value
         });
     };
-    const handleSubmit = e => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setLoginError('');
-        signIn(formData.email, formData.password)
-            .then(result => {
-                const user = result.user;
-                console.log(user);
-                setLoginUserEmail(formData.email);
-                setSuccess("Login Successful")
-                navigate('/')
-            })
-            .catch(error => {
-                console.log(error.message)
-                setLoginError(error.message);
-            });
-    }
+        setSuccess('');
+
+        try {
+            const result = await signIn(formData.email, formData.password);
+            const user = result.user;
+            console.log(user.email)
+            setLoginUserEmail(user.email);
+            setSuccess("Login Successful");
+            console.log("loginUserEmail", loginUserEmail);
+            navigate("/dashboard");
+        } catch (error) {
+            console.log(error.message);
+            setLoginError(error.message);
+        }
+    };
+
     return (
         <div className="bg-[rgb(122,173,255)] signUp py-20">
             <div className="flex flex-col lg:flex-row w-full lg:justify-center items-center">

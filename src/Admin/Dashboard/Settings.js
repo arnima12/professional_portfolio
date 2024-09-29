@@ -13,10 +13,13 @@ const Settings = () => {
     ];
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState(null);
-    const [password, setPassword] = useState("");
+    const [currentPassword, setCurrentPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [passwordError, setPasswordError] = useState("");
-    const { currentUser } = useContext(AuthContext);
+    const { currentUser, changePassword, signIn } = useContext(AuthContext);
+
     useEffect(() => {
         const fetchLogo = async () => {
             try {
@@ -79,23 +82,54 @@ const Settings = () => {
         document.getElementById('hiddenFileInput').click();
     };
     const handlePasswordChange = (e) => {
-        const newPassword = e.target.value;
-        setPassword(newPassword);
-        validatePassword(newPassword);
+        const { name, value } = e.target;
+        if (name === "currentPassword") {
+            setCurrentPassword(value);
+        } else if (name === "newPassword") {
+            setNewPassword(value);
+            validatePassword(value);
+        } else if (name === "confirmPassword") {
+            setConfirmPassword(value);
+        }
     };
+
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
+
     const validatePassword = (password) => {
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
         if (!passwordRegex.test(password)) {
-            setPasswordError(
-                "Password must be at least 8 characters long and include at least one letter and one number."
-            );
+            setPasswordError("Password must be at least 8 characters long and include at least one letter and one number.");
         } else {
             setPasswordError("");
         }
     };
+    const handleChangePassword = async () => {
+        if (newPassword !== confirmPassword) {
+            alert("New password and confirm password do not match");
+            return;
+        }
+
+        try {
+            // Re-authenticate the user first
+            await signIn(currentUser.email, currentPassword);
+
+            // If re-authentication is successful, change the password
+            await changePassword(newPassword);
+            alert("Password changed successfully!");
+
+            // Reset the password fields
+            setCurrentPassword("");
+            setNewPassword("");
+            setConfirmPassword("");
+        } catch (error) {
+            console.error('Failed to change password:', error);
+            alert(error.message);
+        }
+    };
+
+
     return (
         <div className="flex w-[100%] flex-col md:flex-row">
             <DashboardLeft paddingBottom="16.5rem" />
@@ -157,78 +191,91 @@ const Settings = () => {
                         </button>
                     </div>
                 </div>
-                <div className="bg-[rgba(144,202,215,0.61)] px-4 rounded-2xl flex justify-between py-8 mt-8 h-[15rem]">
-                    <div>
-                        <h2 className="text-[rgb(27,66,124)] text-[36px] font-[700] text-left">Change Password</h2>
-                        <p className="text-[rgb(102,145,214)] text-left text-[24px] font-[700]">Add Letters , digits and icons for strong password </p>
+                <div className="bg-[rgba(144,202,215,0.61)] px-4 rounded-2xl py-8 mt-8 h-[20rem]">
+                    <div className="flex justify-between ">
+                        <div>
+                            <h2 className="text-[rgb(27,66,124)] text-[36px] font-[700] text-left">Change Password</h2>
+                            <p className="text-[rgb(102,145,214)] text-left text-[24px] font-[700]">Add Letters , digits and icons for strong password </p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-[0.2rem]">
+                            <div className="form-group ml-4 bg-transparent">
+                                <label for="currentPassword" className="bg-[rgb(210,227,255)] w-[10rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">Current Password</label>
+                                <input
+                                    className="w-[12rem] md:w-[18rem] mb-2 text-black rounded-lg h-[2.5rem] px-2 bg-transparent border-4 border-white"
+                                    type={showPassword ? "text" : "password"}
+                                    name="currentPassword"
+                                    value={currentPassword}
+                                    placeholder="Enter your current password"
+                                    onChange={handlePasswordChange}
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    className="absolute inset-y-0 right-0 px-3 py-1 top-8"
+                                    onClick={togglePasswordVisibility}
+                                >
+                                    {showPassword ? (
+                                        <FaEye className="text-[rgb(102,145,214)]" />
+                                    ) : (
+                                        <FaEyeSlash className="text-[rgb(102,145,214)]" />
+                                    )}
+                                </button>
+                            </div>
+                            <div className="form-group ml-4 bg-transparent">
+                                <label for="newPassword" className="bg-[rgb(210,227,255)] w-[10rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">Confirm Password</label>
+                                <input
+                                    className="w-[12rem] md:w-[18rem] mb-2 text-black rounded-lg h-[2.5rem] px-2 bg-transparent border-4 border-white"
+                                    type={showPassword ? "text" : "password"}
+                                    name="newPassword"
+                                    value={newPassword}
+                                    placeholder="Enter your current password"
+                                    onChange={handlePasswordChange}
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    className="absolute inset-y-0 right-0 px-3 py-1 top-8"
+                                    onClick={togglePasswordVisibility}
+                                >
+                                    {showPassword ? (
+                                        <FaEye className="text-[rgb(102,145,214)]" />
+                                    ) : (
+                                        <FaEyeSlash className="text-[rgb(102,145,214)]" />
+                                    )}
+                                </button>
+                            </div>
+                            <div className="form-group ml-4 bg-transparent">
+                                <label for="confirmPassword" className="bg-[rgb(210,227,255)] w-[10rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">New Password</label>
+                                <input
+                                    className="w-[12rem] md:w-[18rem] mb-2 text-black rounded-lg h-[2.5rem] px-2 bg-transparent border-4 border-white"
+                                    type={showPassword ? "text" : "password"}
+                                    name="confirmPassword"
+                                    value={confirmPassword}
+                                    placeholder="Enter your new password"
+                                    onChange={handlePasswordChange}
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    className="absolute inset-y-0 right-0 px-3 py-1 top-8"
+                                    onClick={togglePasswordVisibility}
+                                >
+                                    {showPassword ? (
+                                        <FaEye className="text-[rgb(102,145,214)]" />
+                                    ) : (
+                                        <FaEyeSlash className="text-[rgb(102,145,214)]" />
+                                    )}
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-[0.2rem]">
-                        <div className="form-group ml-4 bg-transparent">
-                            <label for="password" className="bg-[rgb(210,227,255)] w-[10rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">Current Password</label>
-                            <input
-                                className="w-[12rem] md:w-[18rem] mb-2 text-black rounded-lg h-[2.5rem] px-2 bg-transparent border-4 border-white"
-                                type={showPassword ? "text" : "password"}
-                                value={password}
-                                placeholder="Enter your current password"
-                                onChange={handlePasswordChange}
-                                required
-                            />
-                            <button
-                                type="button"
-                                className="absolute inset-y-0 right-0 px-3 py-1 top-8"
-                                onClick={togglePasswordVisibility}
-                            >
-                                {showPassword ? (
-                                    <FaEye className="text-[rgb(102,145,214)]" />
-                                ) : (
-                                    <FaEyeSlash className="text-[rgb(102,145,214)]" />
-                                )}
-                            </button>
-                        </div>
-                        <div className="form-group ml-4 bg-transparent">
-                            <label for="password" className="bg-[rgb(210,227,255)] w-[10rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">Confirm Password</label>
-                            <input
-                                className="w-[12rem] md:w-[18rem] mb-2 text-black rounded-lg h-[2.5rem] px-2 bg-transparent border-4 border-white"
-                                type={showPassword ? "text" : "password"}
-                                value={password}
-                                placeholder="Enter your current password"
-                                onChange={handlePasswordChange}
-                                required
-                            />
-                            <button
-                                type="button"
-                                className="absolute inset-y-0 right-0 px-3 py-1 top-8"
-                                onClick={togglePasswordVisibility}
-                            >
-                                {showPassword ? (
-                                    <FaEye className="text-[rgb(102,145,214)]" />
-                                ) : (
-                                    <FaEyeSlash className="text-[rgb(102,145,214)]" />
-                                )}
-                            </button>
-                        </div>
-                        <div className="form-group ml-4 bg-transparent">
-                            <label for="password" className="bg-[rgb(210,227,255)] w-[10rem] py-2 rounded-lg text-[rgb(17,72,153)] font-semibold">New Password</label>
-                            <input
-                                className="w-[12rem] md:w-[18rem] mb-2 text-black rounded-lg h-[2.5rem] px-2 bg-transparent border-4 border-white"
-                                type={showPassword ? "text" : "password"}
-                                value={password}
-                                placeholder="Enter your new password"
-                                onChange={handlePasswordChange}
-                                required
-                            />
-                            <button
-                                type="button"
-                                className="absolute inset-y-0 right-0 px-3 py-1 top-8"
-                                onClick={togglePasswordVisibility}
-                            >
-                                {showPassword ? (
-                                    <FaEye className="text-[rgb(102,145,214)]" />
-                                ) : (
-                                    <FaEyeSlash className="text-[rgb(102,145,214)]" />
-                                )}
-                            </button>
-                        </div>
+                    <div className="flex justify-end">
+                        <button
+                            className="bg-[rgb(102,145,214)] px-4 py-2 text-white rounded-lg mt-4"
+                            onClick={handleChangePassword}
+                        >
+                            Change Password
+                        </button>
                     </div>
                 </div>
                 <div>

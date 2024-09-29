@@ -1,27 +1,56 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Institution from './Institution';
 import './Education.css';
-import { AuthContext } from '../../../context/AuthProvider';
+import { useParams } from 'react-router-dom';
+
 const Education = () => {
     const [education, setEducation] = useState([]);
     const [error, setError] = useState(null);
-    const { currentUser } = useContext(AuthContext)
-    const userEmail = currentUser?.email;
+    const { email } = useParams();
+
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                if (userEmail) {
-                    const response = await fetch(`http://localhost:8000/users/${userEmail}`);
-                    console.log("response", response);
+                console.log("Email from URL params:", email);
+                if (email) {
+                    const response = await fetch(`http://localhost:8000/users/${email}`);
                     const contentType = response.headers.get('content-type');
-                    console.log("headers", contentType);
+
+                    if (response.status === 404) {
+                        console.log('User not found, displaying demo education data');
+                        const demoEducation = [
+                            {
+                                id: 1,
+                                degree: "Bsc",
+                                school: "BUP",
+                                grades: "3.50",
+                                startYear: "2020",
+                                endYear: "2023",
+                                logo: "http://localhost:8000/uploads/1726658196668.png",
+                                border: true
+                            },
+                            {
+                                id: 2,
+                                degree: "Bsc",
+                                school: "BUP",
+                                grades: "3.50",
+                                startYear: "2020",
+                                endYear: "2023",
+                                logo: "http://localhost:8000/uploads/1726658196668.png",
+                                border: true
+                            },
+                        ];
+                        setEducation(demoEducation);
+                        return;
+                    }
+
                     if (!response.ok) {
                         throw new Error(`Error: ${response.statusText}`);
                     }
 
                     if (contentType && contentType.includes('application/json')) {
                         const data = await response.json();
-                        setEducation(data.education);
+                        setEducation(data.education || []);
                     } else {
                         throw new Error('Received non-JSON response');
                     }
@@ -29,57 +58,41 @@ const Education = () => {
                     const demoEducation = [
                         {
                             id: 1,
-                            name: "Demo University",
-                            year: "2015 - 2019",
-                            img: "demo-university.png",
-                            className: "demo-institution",
+                            degree: "Bsc",
+                            school: "BUP",
+                            grades: "3.50",
+                            startYear: "2020",
+                            endYear: "2023",
+                            logo: "http://localhost:8000/uploads/1726658196668.png",
                             border: true
                         },
                         {
                             id: 2,
-                            name: "Sample College",
-                            year: "2013 - 2015",
-                            img: "sample-college.png",
-                            className: "demo-institution",
-                            border: true
-                        },
-                        {
-                            id: 3,
-                            name: "Sample College",
-                            year: "2013 - 2015",
-                            img: "sample-college.png",
-                            className: "demo-institution",
-                            border: true
-                        },
-                        {
-                            id: 4,
-                            name: "Sample College",
-                            year: "2013 - 2015",
-                            img: "sample-college.png",
-                            className: "demo-institution",
-                            border: true
-                        },
-                        {
-                            id: 5,
-                            name: "Sample College",
-                            year: "2013 - 2015",
-                            img: "sample-college.png",
-                            className: "demo-institution",
+                            degree: "Bsc",
+                            school: "BUP",
+                            grades: "3.50",
+                            startYear: "2020",
+                            endYear: "2023",
+                            logo: "http://localhost:8000/uploads/1726658196668.png",
                             border: true
                         },
                     ];
                     setEducation(demoEducation);
                 }
             } catch (error) {
+                console.error("Error fetching user data:", error);
                 setError(error.message);
             }
         };
+
         fetchUserData();
-    }, [userEmail]);
+    }, [email]);
+
 
     if (error) {
-        return console.log("error: ", error);
+        return <div>Error: {error}</div>;
     }
+
     return (
         <div className="education px-8 my-24">
             <div className="flex flex-row items-center justify-center lg:justify-start gap-4">
@@ -87,9 +100,13 @@ const Education = () => {
                 <div className="text-[rgb(30,81,153)] text-[50px] md:text-[64px] font-bold">My Education</div>
             </div>
             <div className="education-container grid xl:grid-cols-5 lg:grid-cols-3 grid-cols-1 gap-8 mt-16 justify-items-center">
-                {
-                    education.map((institution) => <Institution key={institution.id} institution={institution} className="institution"></Institution>)
-                }
+                {education.length > 0 ? (
+                    education.map((institution) => (
+                        <Institution key={institution.id} institution={institution} className="institution" />
+                    ))
+                ) : (
+                    <div>No education data available</div>
+                )}
             </div>
         </div>
     );

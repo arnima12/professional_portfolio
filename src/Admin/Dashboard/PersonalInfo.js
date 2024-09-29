@@ -13,10 +13,8 @@ const PersonalInfo = () => {
         { id: "3", img: "https://i.ibb.co/W5ZqJ39/profile.png" }
     ];
     const [image, setImage] = useState(null);
-    // const [logo, setLogo] = useState(null);
     const [logoFiles, setLogoFiles] = useState({});
     const [preview, setPreview] = useState(null);
-    // const [logoPreview, setLogoPreview] = useState(null);
     const { currentUser } = useContext(AuthContext);
     console.log("cur", currentUser)
     const [userData, setUserData] = useState(null);
@@ -105,14 +103,14 @@ const PersonalInfo = () => {
     const handleLogoChange = (index, e) => {
         const file = e.target.files[0];
         if (file) {
-            const fileURL = URL.createObjectURL(file); // Create a URL for the file
+            const fileURL = URL.createObjectURL(file);
             console.log("file", fileURL)
             setFormData((prevFormData) => {
                 const updatedEducation = [...prevFormData.education];
                 console.log("updatedEducation", updatedEducation)
                 updatedEducation[index] = {
                     ...updatedEducation[index],
-                    logo: fileURL // Store the file URL instead of base64
+                    logo: fileURL 
                 };
                 console.log("Updated Education Array:", updatedEducation);
                 return {
@@ -127,24 +125,17 @@ const PersonalInfo = () => {
                 [`education[${index}][logo]`]: file
             }));
 
-            // Optionally, revoke the URL when it's no longer needed
             return () => {
                 URL.revokeObjectURL(fileURL);
             };
         }
     };
 
-    // setFormData(prevFormData => {
-    //     const updatedEducation = [...prevFormData.education];
-    //     updatedEducation[index].logo = reader;
-    //     return { ...prevFormData, education: updatedEducation };
-    // });
     const handleInputChange = (index, e) => {
         e.preventDefault();
         const { name, value } = e.target;
 
         if (["degree", "school", "grades", "startYear", "endYear", "logo"].includes(name)) {
-            // Handle education fields
             setFormData(prevData => {
                 const updatedEducation = [...prevData.education];
                 updatedEducation[index] = {
@@ -159,7 +150,6 @@ const PersonalInfo = () => {
                 };
             });
         } else if (["companyName", "jobTitle", "startDate", "endDate", "details"].includes(name)) {
-            // Handle experience fields
             setFormData(prevData => {
                 const updatedExperience = [...prevData.experience];
                 updatedExperience[index] = {
@@ -172,7 +162,6 @@ const PersonalInfo = () => {
                 };
             });
         } else {
-            // Handle other fields
             setFormData(prevData => ({
                 ...prevData,
                 [name]: value,
@@ -194,7 +183,7 @@ const PersonalInfo = () => {
         }
     };
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent the default form submission
+        e.preventDefault();
 
         const userEmail = currentUser?.email;
         if (!userEmail) {
@@ -215,7 +204,6 @@ const PersonalInfo = () => {
         formDataToSend.append("youtube", formData.youtube || "");
         formDataToSend.append("address", formData.address || "");
 
-        // Append education details with logos
         formData.education.forEach((edu, index) => {
             formDataToSend.append(`education[${index}][degree]`, edu.degree);
             formDataToSend.append(`education[${index}][school]`, edu.school);
@@ -226,7 +214,6 @@ const PersonalInfo = () => {
 
         });
 
-        // Append experience details
         formData.experience.forEach((exp, index) => {
             formDataToSend.append(`experience[${index}][companyName]`, exp.companyName);
             formDataToSend.append(`experience[${index}][jobTitle]`, exp.jobTitle);
@@ -242,7 +229,7 @@ const PersonalInfo = () => {
         }
         console.log("newForm", formData)
         try {
-            console.log("Sending request to backend..."); // Debug log
+            console.log("Sending request to backend..."); 
 
             const response = await fetch(`http://localhost:8000/users/${userEmail}`, {
                 method: "PATCH",
@@ -299,7 +286,6 @@ const PersonalInfo = () => {
     }
     const handleRemoveEducation = async (educationIndex) => {
         try {
-            // Optimistically update the state on frontend
             setFormData((prevData) => ({
                 ...prevData,
                 education: prevData.education.filter((_, index) => index !== educationIndex),
@@ -307,7 +293,6 @@ const PersonalInfo = () => {
             const userEmail = currentUser.email;
             const url = `http://localhost:8000/users/${userEmail}/remove-education`
 
-            // Send request to backend to remove education entry by index
             const response = await fetch(url, {
                 method: 'PATCH',
                 headers: {
@@ -361,7 +346,6 @@ const PersonalInfo = () => {
 
     const handleRemoveExperience = async (experienceIndex) => {
         try {
-            // Optimistically update the state on frontend
             setFormData((prevData) => ({
                 ...prevData,
                 experience: prevData.experience.filter((_, index) => index !== experienceIndex),
@@ -585,7 +569,7 @@ const PersonalInfo = () => {
                                                 className="border-[rgb(210,227,255)] text-[rgb(17,72,153)] h-[3rem] border-2 w-[30rem] rounded-lg px-2"
                                                 placeholder="Enter your course details"
                                                 value={edu.degree || ''}
-                                                onChange={(e) => handleInputChange(index, e)} // Pass the event here
+                                                onChange={(e) => handleInputChange(index, e)} 
                                             />
                                         </div>
                                         <div className="form-group">

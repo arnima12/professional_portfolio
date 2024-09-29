@@ -12,8 +12,8 @@ const DashboardLeft = ({ paddingBottom }) => {
     const dashboardMenu = [
         { id: "1", img: "https://i.ibb.co/JF2QhYc/dashboard.png", title: "Dashboard", link: "/dashboard" },
         { id: "2", img: "https://i.ibb.co/KV6tz41/personal.png", title: "Personal Info", link: "/dashboard/personalInfo" },
-        { id: "3", img: "https://i.ibb.co/DVm9vgJ/view.png", title: "View Projects", link: "/dashboard" },
-        { id: "4", img: "https://i.ibb.co/jb4qW6P/analytics.png", title: "Analytics", link: "/dashboard" },
+        { id: "3", img: "https://i.ibb.co/DVm9vgJ/view.png", title: "View Projects", link: "/dashboard/myProject" },
+        { id: "4", img: "https://i.ibb.co/jb4qW6P/analytics.png", title: "Analytics", link: "/dashboard/analytics" },
         { id: "5", img: "https://i.ibb.co/f9kXx3M/upload.png", title: "Upload Projects", link: `/dashboard/upload?dropdown=${isDropdownOpen}` },
         { id: "6", img: "https://i.ibb.co/xqCSpPj/settings.png", title: "Settings", link: "/dashboard/settings" }
     ];
@@ -29,10 +29,9 @@ const DashboardLeft = ({ paddingBottom }) => {
     const { currentUser } = useContext(AuthContext);
     const [userData, setUserData] = useState(null);
     useEffect(() => {
-        // Fetch user data from the backend
         const fetchUserData = async () => {
             try {
-                const response = await fetch('http://localhost:8000/users'); // Adjust the API endpoint as necessary
+                const response = await fetch('http://localhost:8000/users');
                 const users = await response.json();
                 const currentUserData = users.find(user => user.email === currentUser.email);
                 setUserData(currentUserData);
