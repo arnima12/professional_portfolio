@@ -26,7 +26,7 @@ const Settings = () => {
                 const response = await fetch(`http://localhost:8000/users/${currentUser.email}`);
                 const result = await response.json();
                 if (response.ok) {
-                    setPreview(result.logo || upload); // Assuming result.logoUrl contains the URL of the existing logo
+                    setPreview(result.logo || upload);
                 } else {
                     console.error('Failed to fetch logo:', result.message);
                 }
@@ -40,8 +40,8 @@ const Settings = () => {
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setImage(file);  // Store the actual File object
-            const previewUrl = URL.createObjectURL(file);  // Local preview
+            setImage(file); 
+            const previewUrl = URL.createObjectURL(file); 
             setPreview(previewUrl);
             console.log("File selected:", file);
             console.log("Preview URL:", previewUrl);
@@ -112,14 +112,11 @@ const Settings = () => {
         }
 
         try {
-            // Re-authenticate the user first
             await signIn(currentUser.email, currentPassword);
 
-            // If re-authentication is successful, change the password
             await changePassword(newPassword);
             alert("Password changed successfully!");
 
-            // Reset the password fields
             setCurrentPassword("");
             setNewPassword("");
             setConfirmPassword("");

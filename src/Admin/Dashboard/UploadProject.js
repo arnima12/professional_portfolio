@@ -20,7 +20,7 @@ const useDebounce = (value, delay) => {
     return debouncedValue;
 };
 const UploadProject = () => {
-    const [activeSection, setActiveSection] = useState("image");
+    const [activeSection, setActiveSection] = useState("gallery");
     const [uploadedImages, setUploadedImages] = useState([]);
     const [imagesWithTitles, setImagesWithTitles] = useState([]);
     const [videosWithTitles, setVideosWithTitles] = useState([]);
@@ -38,90 +38,83 @@ const UploadProject = () => {
 
     useEffect(() => {
         const draftData = {
-            images: imagesWithTitles,
-            videos: videosWithTitles,
-            blogs: blogsWithTitles.map((blog, index) => ({
-                title: blog.title || 'Untitled', // Default to 'Untitled' if title is empty
-                desc: blogsWithDesc[index]?.desc || '' // Ensure description exists
-            })),
-            news: newsWithTitles.map((newsItem, index) => ({
-                title: newsItem.title || 'Untitled', // Default to 'Untitled' if title is empty
-                desc: newsWithDesc[index]?.desc || '' // Ensure description exists
-            })),
+            activeSection,
+            gallery: {
+                files: imagesWithTitles.map((img, index) => ({
+                    title: img.title || 'Untitled',
+                    file: uploadedImages[index], // Associate the uploaded image file
+                })),
+            },
+            video: {
+                files: videosWithTitles.map((video, index) => ({
+                    title: video.title || 'Untitled', // Assuming videosWithTitles has title properties
+                    file: uploadedVideos[index], // Associate the uploaded video file
+                })),
+            },
+            blogs: {
+                files: blogsWithTitles.map((blog, index) => ({
+                    title: blog.title || 'Untitled',
+                    desc: blogsWithDesc[index]?.desc || '',
+                    file: uploadedBlogs[index], // Associate the uploaded blog file (if applicable)
+                })),
+            },
+            news: {
+                files: newsWithTitles.map((newsItem, index) => ({
+                    title: newsItem.title || 'Untitled',
+                    desc: newsWithDesc[index]?.desc || '',
+                    file: uploadedNews[index], // Associate the uploaded news file (if applicable)
+                })),
+            },
         };
-        setDraft(draftData);
-    }, [imagesWithTitles, videosWithTitles, blogsWithTitles, blogsWithDesc, newsWithTitles, newsWithDesc]);
+        const updateDraftTimeout = setTimeout(() => {
+            setDraft(draftData);
+        }, 10000);
+
+        return () => clearTimeout(updateDraftTimeout);
+    }, [activeSection, imagesWithTitles, videosWithTitles, blogsWithTitles, blogsWithDesc, newsWithTitles, newsWithDesc, uploadedImages, uploadedVideos, uploadedBlogs, uploadedNews]);
+    useEffect(() => {
+        console.log(draft)
+    })
     useEffect(() => {
         const uploadDraft = async () => {
-            if (Object.keys(debouncedDraft).length > 0) {
-                try {
-                    const formData = new FormData();
-
-                    // Collect all items (images, blogs, news, videos) with section info
-                    const allItems = [
-                        ...imagesWithTitles.map(image => ({ file: image.file, title: image.title, activeSection: 'gallery' })), // section: 'gallery'
-                        ...blogsWithTitles.map(blog => ({ file: blog.file, title: blog.title || 'Untitled', desc: blog.desc, activeSection: 'blog' })), // section: 'blog'
-                        ...newsWithTitles.map(newsItem => ({ file: newsItem.file, title: newsItem.title || 'Untitled', desc: newsItem.desc, activeSection: 'news' })), // section: 'news'
-                        ...videosWithTitles.map(video => ({ file: video.file, title: video.title || 'Untitled', activeSection: 'video' })) // section: 'video'
-                    ];
-
-                    // Add files and corresponding metadata to FormData
-                    allItems.forEach((item, index) => {
-                        switch (item.activeSection) {
-                            case 'gallery':
-                                formData.append('draft', item.file); // File for gallery
-                                formData.append(`gallery[${index}][title]`, item.title); // Title for gallery image
-                                formData.append(`gallery[${index}][activeSection]`, item.activeSection); // Mark section as gallery
-                                break;
-                            case 'blog':
-                                formData.append('draft', item.file); // File for blog
-                                formData.append(`blogs[${index}][title]`, item.title); // Title for blog
-                                formData.append(`blogs[${index}][desc]`, item.desc); // Blog description
-                                formData.append(`blogs[${index}][activeSection]`, item.activeSection); // Mark section as blog
-                                break;
-                            case 'news':
-                                formData.append('draft', item.file); // File for news
-                                formData.append(`news[${index}][title]`, item.title); // Title for news
-                                formData.append(`news[${index}][desc]`, item.desc); // News description
-                                formData.append(`news[${index}][activeSection]`, item.activeSection); // Mark section as news
-                                break;
-                            case 'video':
-                                formData.append('videos', item.file); // File for video
-                                formData.append(`videos[${index}][title]`, item.title); // Title for video
-                                formData.append(`videos[${index}][activeSection]`, item.activeSection); // Mark section as video
-                                break;
-                            default:
-                                console.warn(`Unknown section: ${item.activeSection}`);
-                                break;
-                        }
+            try {
+                const formData = new FormData();
+                formData.append('draftData', JSON.stringify(debouncedDraft));
+                if (selectedFiles && selectedFiles.length > 0) {
+                    selectedFiles.forEach((file) => {
+                        formData.append('files', file); // Append each file
                     });
+                }
+                const hasValidData =
+                    (draft.gallery?.files.some(file => file.file || file.title) ||
+                        draft.video?.files.some(file => file.file || file.title) ||
+                        draft.blogs?.files.some(file => file.file || file.title) ||
+                        draft.news?.files.some(file => file.file || file.title));
 
-                    // Send formData to the backend
-                    const response = await fetch(`http://localhost:8000/users/${currentUser.email}/draft`, {
+                if (hasValidData) {
+                    const response = await fetch(`http://localhost:8000/users/${currentUser.email}/updatedDraft`, {
                         method: 'PATCH',
                         body: formData,
                     });
 
                     if (!response.ok) {
-                        const errorData = await response.json();
-                        throw new Error(`Upload failed: ${errorData.message}`);
+                        throw new Error('Network response was not ok');
                     }
 
-                    const responseData = await response.json();
-                    console.log(responseData);
-
-                } catch (error) {
-                    console.error("Error uploading:", error);
+                    const data = await response.json();
+                    console.log('Draft data uploaded:', data);
+                } else {
+                    console.log('No valid files or titles to upload.');
                 }
+            } catch (error) {
+                console.error('Error uploading draft data:', error);
             }
         };
 
-        if (debouncedDraft && Object.keys(debouncedDraft).length > 0) {
+        if (Object.keys(debouncedDraft).length > 0) { // Ensure there's data to upload
             uploadDraft();
         }
-
-        console.log("Draft:", debouncedDraft);
-    }, [debouncedDraft, currentUser.email]); // Ensure `debouncedDraft` and `currentUser.email` are dependencies
+    }, [debouncedDraft, currentUser.email, selectedFiles]);
 
 
     const handleSectionChange = (section) => {
@@ -132,9 +125,9 @@ const UploadProject = () => {
         const files = Array.from(e.target.files);
         setSelectedFiles(files);
 
-        const newDraft = files.map(file => ({ image: file, title: '' }));
+        // const newDraft = files.map(file => ({ image: file, title: '' }));
 
-        if (activeSection === "image") {
+        if (activeSection === "gallery") {
             const newImagesWithTitles = files.map(file => ({ file, title: '' }));
             setUploadedImages([...uploadedImages, ...files]);
             setImagesWithTitles([...imagesWithTitles, ...newImagesWithTitles]);
@@ -221,7 +214,7 @@ const UploadProject = () => {
             return;
         }
         const formData = new FormData();
-        if (activeSection === "image") {
+        if (activeSection === "gallery") {
             selectedFiles.forEach((file) => {
                 formData.append('gallery', file);
             });
@@ -332,35 +325,6 @@ const UploadProject = () => {
             }
         }
     };
-    // useEffect(() => {
-    //     const uploadDraft = async () => {
-    //         if (draft.length === 0) return; // Guard clause
-
-    //         try {
-    //             const response = await fetch(`http://localhost:8000/users/${currentUser.email}/draft`, {
-    //                 method: 'PATCH',
-    //                 headers: {
-    //                     'Content-Type': 'application/json',
-    //                 },
-    //                 body: JSON.stringify({ draft }),
-    //             });
-
-    //             if (!response.ok) {
-    //                 const errorData = await response.json();
-    //                 throw new Error(`Upload failed: ${errorData.message}`);
-    //             }
-
-    //             // Resetting draft after successful upload
-    //             // setDraft([]);
-    //         } catch (error) {
-    //             console.error("Error uploading:", error);
-    //             // alert(`Error uploading: ${error.message}`);
-    //         }
-    //     };
-
-    //     uploadDraft();
-    //     console.log(draft)
-    // }, [draft]);
 
     return (
         <div className="flex flex-col md:flex-row">
@@ -381,7 +345,7 @@ const UploadProject = () => {
                 {/* Section buttons */}
                 <div className="grid grid-cols-2 md:grid-cols-4 justify-items-center gap-8 mt-16 md:mx-32">
                     <div
-                        className={`w-[10rem] h-[2rem] text-xl font-bold rounded-lg px-2 cursor-pointer ${activeSection === 'image' ? 'bg-[rgb(17,72,153)] text-white' : 'border-2 border-[rgb(17,72,153)] text-[rgb(17,72,153)]'}`}
+                        className={`w-[10rem] h-[2rem] text-xl font-bold rounded-lg px-2 cursor-pointer ${activeSection === 'gallery' ? 'bg-[rgb(17,72,153)] text-white' : 'border-2 border-[rgb(17,72,153)] text-[rgb(17,72,153)]'}`}
                         onClick={() => handleSectionChange('image')}
                     >
                         Add Image
@@ -410,7 +374,7 @@ const UploadProject = () => {
                 <div className="w-full mt-12">
                     <div className="flex items-center flex-col">
 
-                        {activeSection === 'image' && (
+                        {activeSection === 'gallery' && (
                             <div className="border-dashed border-2 w-[20rem] md:w-[32rem] flex flex-col items-center border-[rgb(122,173,255)] pb-6">
                                 <img src={browse} alt="browse" className="w-[12rem]" />
                                 <input
