@@ -5,12 +5,9 @@ import { FaEye, FaEyeSlash, FaUpload } from 'react-icons/fa';
 import upload from "../../assets/green-upload.jpg";
 import './Dashboard.css';
 import { AuthContext } from '../../context/AuthProvider';
+import { useNavigate } from 'react-router-dom';
+import Calendar from 'react-calendar';
 const Settings = () => {
-    const settings = [
-        { id: "1", img: "https://i.ibb.co/hLv67Nx/analytics.png" },
-        { id: "2", img: "https://i.ibb.co/F3rtmB5/notification.png" },
-        { id: "3", img: "https://i.ibb.co/W5ZqJ39/profile.png" }
-    ];
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState(null);
     const [currentPassword, setCurrentPassword] = useState("");
@@ -19,7 +16,70 @@ const Settings = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [passwordError, setPasswordError] = useState("");
     const { currentUser, changePassword, signIn } = useContext(AuthContext);
+    const { logOut, setCurrentUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [notifications, setNotifications] = useState([]);
+    const [events, setEvents] = useState([]);
+    const [showCalendar, setShowCalendar] = useState(false);
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [date, setDate] = useState(new Date());
+    const email = currentUser.email;
+    useEffect(() => {
+        const fetchNotifications = async () => {
+            try {
+                const response = await fetch(`http://localhost:8000/users/${email}/notifications`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setNotifications(data.notifications);
+                }
+            } catch (error) {
+                console.error('Error fetching notifications:', error);
+            }
+        };
 
+        if (email) {
+            fetchNotifications();
+        }
+    }, [email]);
+
+    const handleNotificationClick = (notification) => {
+        alert(`${notification.senderName} (${notification.senderEmail}) sends you subject: ${notification.subject} & the message: ${notification.message}`);
+    };
+    const handleAddEvent = async (e) => {
+        e.preventDefault();
+        const newEvent = { title, date, description };
+        try {
+            const response = await fetch(`http://localhost:8000/users/${email}/events`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newEvent),
+            });
+            console.log("res", response)
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            setEvents([...events, data]); // Assuming the API returns the created event
+            setTitle('');
+            setDescription('');
+            setDate(new Date());
+            setShowCalendar(false); // Hide calendar after adding event
+        } catch (error) {
+            console.error('Error adding event:', error);
+        }
+    };
+    const handleSignOut = () => {
+        logOut()
+            .then(() => {
+                setCurrentUser(null);
+                navigate('/signIn');
+            }).catch((error) => {
+                // An error happened.
+            });
+    }
     useEffect(() => {
         const fetchLogo = async () => {
             try {
@@ -40,8 +100,8 @@ const Settings = () => {
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setImage(file); 
-            const previewUrl = URL.createObjectURL(file); 
+            setImage(file);
+            const previewUrl = URL.createObjectURL(file);
             setPreview(previewUrl);
             console.log("File selected:", file);
             console.log("Preview URL:", previewUrl);
@@ -125,8 +185,6 @@ const Settings = () => {
             alert(error.message);
         }
     };
-
-
     return (
         <div className="flex w-[100%] flex-col md:flex-row">
             <DashboardLeft paddingBottom="16.5rem" />
@@ -136,19 +194,73 @@ const Settings = () => {
                         <h2 className="text-[rgb(27,66,124)] text-[48px] font-[700] text-left">Settings</h2>
                         <p className="text-[rgb(125,225,248)] text-left text-[24px] font-[700]">Manage your account settings</p>
                     </div>
-                    <div className="bg-[rgb(27,66,124)] w-[16rem] md:w-[26rem] h-[2.5rem] mt-4 rounded-full border-2 border-[rgb(125,225,248)] mr-8 md:mr-4">
+                    {/* <div className="bg-[rgb(27,66,124)] w-[16rem] md:w-[26rem] h-[2.5rem] mt-4 rounded-full border-2 border-[rgb(125,225,248)] mr-8 md:mr-4">
                         <div className="flex justify-end">
                             <IoIosSearch className="text-white text-2xl mr-3 my-1 font-[100]" />
                         </div>
-                    </div>
-                    <div className="flex gap-8 mt-8 justify-center">
-                        {settings.map((menu) => (
-                            <div key={menu.id} className="flex items-center gap-8 text-xl font-semibold text-white">
-                                <div className="w-[3rem] h-[3rem] rounded-full border-[rgba(218,211,211,0.718)] border-[3px] blur-[0.8px] flex items-center justify-center bg-[rgb(27,66,124)]">
-                                    <img src={menu.img} alt="" className="w-[1.5rem]" />
+                    </div> */}
+                    <div className={`flex gap-8 mt-8 justify-center`}>
+                        <div className="flex items-center gap-8 text-xl font-semibold text-white  ">
+                            <button className="w-[3rem] h-[3rem] rounded-full bg-[rgb(27,66,124)] border-[rgba(218,211,211,0.718)] border-[3px] blur-[0.8px] flex items-center justify-center" onClick={() => setShowCalendar(true)}>
+                                <img src={"https://i.ibb.co/hLv67Nx/analytics.png"} alt="" className="w-[1.5rem]" />
+                            </button>
+                            {showCalendar && (
+                                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                                    <div className="bg-gray-800 p-4 rounded">
+                                        <h3 className="text-white text-xl mb-2">Add Event</h3>
+                                        <form onSubmit={handleAddEvent}>
+                                            <input
+                                                type="text"
+                                                value={title}
+                                                onChange={(e) => setTitle(e.target.value)}
+                                                placeholder="Event Title"
+                                                className="w-full p-2 mb-2 rounded text-black"
+                                                required
+                                            />
+                                            <Calendar
+                                                onChange={setDate}
+                                                value={date}
+                                                className="mb-4 text-black"
+                                            />
+                                            <button type="submit" className="mt-2 bg-blue-500 text-white px-4 py-2 rounded">
+                                                Add Event
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => setShowCalendar(false)}
+                                                className="mt-2 bg-red-500 text-white px-4 py-2 rounded ml-2"
+                                            >
+                                                Cancel
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            )}
+                        </div>
+                        <div className="flex items-center gap-8 text-xl font-semibold text-white dropdown dropdown-end">
+                            <button className="w-[3rem] h-[3rem] rounded-full bg-[rgb(27,66,124)] border-[rgba(218,211,211,0.718)] border-[3px] blur-[0.8px] flex items-center justify-center" tabIndex="0">
+                                <img src={"https://i.ibb.co/F3rtmB5/notification.png"} alt="" className="w-[1.5rem]" />
+                            </button>
+                            <ul className="menu dropdown-content bg-[rgb(27,66,124)] rounded-box z-[1] w-[20rem] px-4 py-4 shadow mt-36 text-[rgb(218,211,211)]" tabIndex="0">
+                                {notifications.map((item) => (
+                                    <li
+                                        key={item.id}
+                                        className="text-wrap cursor-pointer"
+                                        onClick={() => handleNotificationClick(item)}
+                                    >
+                                        {item.senderName} ({item.senderEmail}) sends you a message
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className="flex items-center gap-8 text-xl font-semibold text-white dropdown dropdown-end">
+                            <button className="w-[3rem] h-[3rem] rounded-full bg-[rgb(27,66,124)] border-[rgba(218,211,211,0.718)] border-[3px] blur-[0.8px] flex items-center justify-center" tabIndex="0">
+                                <img src={"https://i.ibb.co/W5ZqJ39/profile.png"} alt="" className="w-[1.5rem]" />
+                            </button>
+                            <ul className="menu dropdown-content bg-[rgb(27,66,124)] rounded-box z-[1] w-[8rem] px-4 py-4 shadow mt-28 text-[rgb(218,211,211)]" tabIndex="0">
+                                <button onClick={handleSignOut}>LogOut</button>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div className="bg-[rgba(144,202,215,0.61)] px-4 rounded-2xl flex justify-between py-8 mt-8 h-[15rem]">

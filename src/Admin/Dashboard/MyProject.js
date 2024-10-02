@@ -125,11 +125,11 @@ const MyProject = () => {
                     <div>
                         <h2 className="text-[rgb(27,66,124)] text-[48px] font-[700]">My Projects</h2>
                     </div>
-                    <div className="bg-[rgb(27,66,124)] w-[26rem] h-[2.5rem] mt-4 rounded-full border-2 border-[rgb(125,225,248)] mr-4">
+                    {/* <div className="bg-[rgb(27,66,124)] w-[26rem] h-[2.5rem] mt-4 rounded-full border-2 border-[rgb(125,225,248)] mr-4">
                         <div className="flex justify-end">
                             <IoIosSearch className="text-white text-2xl mr-3 my-1 font-[100]" />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 {/* Section buttons */}
                 <div className="grid grid-cols-2 md:grid-cols-4 justify-items-center gap-8 mt-16 md:mx-32">

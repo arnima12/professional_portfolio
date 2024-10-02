@@ -13,6 +13,8 @@ const Dashboard = () => {
     const [previousReach, setPreviousReach] = useState(0);
     const [percentageIncrease, setPercentageIncrease] = useState(0);
     const [reachData, setReachData] = useState([]);
+    const [searchInput, setSearchInput] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
     const { currentUser } = useContext(AuthContext);
     const email = currentUser.email;
     useEffect(() => {
@@ -43,6 +45,7 @@ const Dashboard = () => {
             setPercentageIncrease(increased.toFixed(0));
         }
     }, [currentReach, previousReach]);
+
     return (
         <div className="flex w-[100%] flex-col md:flex-row">
             <DashboardLeft paddingBottom="16.5rem" />
@@ -52,11 +55,13 @@ const Dashboard = () => {
                         <h2 className="text-[rgb(27,66,124)] text-[48px] font-[700]">Hello User</h2>
                         <p className="text-[rgb(125,225,248)] text-left text-[24px] font-[700]">Manage Your account</p>
                     </div>
-                    <div className="bg-[rgb(27,66,124)] w-[16rem] md:w-[26rem] h-[2.5rem] mt-4 rounded-full border-2 border-[rgb(125,225,248)] mr-8 md:mr-4">
+                    {/* <div className="bg-[rgb(27,66,124)] w-[16rem] md:w-[26rem] h-[2.5rem] mt-4 rounded-full border-2 border-[rgb(125,225,248)] mr-8 md:mr-4">
                         <div className="flex justify-end" >
-                            <IoIosSearch className="text-white text-2xl mr-3 my-1 font-[100]" />
+                            <IoIosSearch
+                                className="text-white text-2xl mr-3 my-1 font-[100] cursor-pointer"
+                            />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="flex flex-col items-center lg:flex-row mt-16 gap-8 ">
                     <Link to="/dashboard/analytics">

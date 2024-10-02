@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import logo from '../../assets/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoMdMenu } from "react-icons/io";
 import { useDropdown } from './DropdownContext/DropdownContext';

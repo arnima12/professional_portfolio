@@ -110,7 +110,7 @@ const PersonalInfo = () => {
                 console.log("updatedEducation", updatedEducation)
                 updatedEducation[index] = {
                     ...updatedEducation[index],
-                    logo: fileURL 
+                    logo: fileURL
                 };
                 console.log("Updated Education Array:", updatedEducation);
                 return {
@@ -229,7 +229,7 @@ const PersonalInfo = () => {
         }
         console.log("newForm", formData)
         try {
-            console.log("Sending request to backend..."); 
+            console.log("Sending request to backend...");
 
             const response = await fetch(`http://localhost:8000/users/${userEmail}`, {
                 method: "PATCH",
@@ -394,11 +394,11 @@ const PersonalInfo = () => {
                         <h2 className="text-[rgb(27,66,124)] text-[48px] font-[700]">Personal Info</h2>
                         <p className="text-[rgb(125,225,248)] text-left text-[24px] font-[700]">Write your profile details</p>
                     </div>
-                    <div className="bg-[rgb(27,66,124)] w-[16rem] md:w-[26rem] h-[2.5rem] mt-4 rounded-full border-2 border-[rgb(125,225,248)] mr-8 md:mr-4">
+                    {/* <div className="bg-[rgb(27,66,124)] w-[16rem] md:w-[26rem] h-[2.5rem] mt-4 rounded-full border-2 border-[rgb(125,225,248)] mr-8 md:mr-4">
                         <div className="flex justify-end">
                             <IoIosSearch className="text-white text-2xl mr-3 my-1 font-[100]" />
                         </div>
-                    </div>
+                    </div> */}
                     <div className="flex gap-8 mt-8 justify-center">
                         {personalMenu.map((menu) => (
                             <div key={menu.id} className="flex items-center gap-8 text-xl font-semibold text-white">
@@ -569,7 +569,7 @@ const PersonalInfo = () => {
                                                 className="border-[rgb(210,227,255)] text-[rgb(17,72,153)] h-[3rem] border-2 w-[30rem] rounded-lg px-2"
                                                 placeholder="Enter your course details"
                                                 value={edu.degree || ''}
-                                                onChange={(e) => handleInputChange(index, e)} 
+                                                onChange={(e) => handleInputChange(index, e)}
                                             />
                                         </div>
                                         <div className="form-group">

@@ -318,18 +318,17 @@ const UploadProject = () => {
         }
     };
     const handleCancel = () => {
-        setSelectedFiles(null);  // Clear the selected files
-        setImagesWithTitles([]); // Clear image titles (if relevant)
-        setVideosWithTitles([]); // Clear video titles (if relevant)
-        setBlogsWithTitles([]);  // Clear blog titles (if relevant)
-        setBlogsWithDesc([]);    // Clear blog descriptions (if relevant)
-        setNewsWithTitles([]);   // Clear news titles (if relevant)
-        setNewsWithDesc([]);     // Clear news descriptions (if relevant)
+        setSelectedFiles(null);
+        setImagesWithTitles([]);
+        setVideosWithTitles([]);
+        setBlogsWithTitles([]);
+        setBlogsWithDesc([]);
+        setNewsWithTitles([]);
+        setNewsWithDesc([]);
 
-        // If you're using a file input element, you can also reset it like this:
         const fileInput = document.querySelector('input[type="file"]');
         if (fileInput) {
-            fileInput.value = '';  // Clear the actual file input field in the form
+            fileInput.value = '';
         }
 
         console.log("Upload canceled, form cleared");
@@ -343,11 +342,11 @@ const UploadProject = () => {
                         <h2 className="text-[rgb(27,66,124)] text-[48px] font-[700]">Upload Projects</h2>
                         <p className="text-[rgb(125,225,248)] text-left text-[24px] font-[700]">Add your latest achievements</p>
                     </div>
-                    <div className="bg-[rgb(27,66,124)] w-[26rem] h-[2.5rem] mt-4 rounded-full border-2 border-[rgb(125,225,248)] mr-4">
+                    {/* <div className="bg-[rgb(27,66,124)] w-[26rem] h-[2.5rem] mt-4 rounded-full border-2 border-[rgb(125,225,248)] mr-4">
                         <div className="flex justify-end" >
                             <IoIosSearch className="text-white text-2xl mr-3 my-1 font-[100]" />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Section buttons */}
