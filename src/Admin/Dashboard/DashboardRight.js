@@ -61,7 +61,6 @@ const DashboardRight = () => {
             if (!response.ok) {
                 throw new Error(`Error: ${response.statusText}`);
             }
-            // Remove the deleted item from the local state
             setDeletedItems(prevItems => prevItems.filter(item => item.id !== itemId));
         } catch (error) {
             setError(error.message);

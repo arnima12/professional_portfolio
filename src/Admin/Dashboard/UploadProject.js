@@ -42,27 +42,27 @@ const UploadProject = () => {
             gallery: {
                 files: imagesWithTitles.map((img, index) => ({
                     title: img.title || 'Untitled',
-                    file: uploadedImages[index], // Associate the uploaded image file
+                    file: uploadedImages[index],
                 })),
             },
             video: {
                 files: videosWithTitles.map((video, index) => ({
-                    title: video.title || 'Untitled', // Assuming videosWithTitles has title properties
-                    file: uploadedVideos[index], // Associate the uploaded video file
+                    title: video.title || 'Untitled',
+                    file: uploadedVideos[index],
                 })),
             },
             blogs: {
                 files: blogsWithTitles.map((blog, index) => ({
                     title: blog.title || 'Untitled',
                     desc: blogsWithDesc[index]?.desc || '',
-                    file: uploadedBlogs[index], // Associate the uploaded blog file (if applicable)
+                    file: uploadedBlogs[index],
                 })),
             },
             news: {
                 files: newsWithTitles.map((newsItem, index) => ({
                     title: newsItem.title || 'Untitled',
                     desc: newsWithDesc[index]?.desc || '',
-                    file: uploadedNews[index], // Associate the uploaded news file (if applicable)
+                    file: uploadedNews[index],
                 })),
             },
         };
@@ -82,7 +82,7 @@ const UploadProject = () => {
                 formData.append('draftData', JSON.stringify(debouncedDraft));
                 if (selectedFiles && selectedFiles.length > 0) {
                     selectedFiles.forEach((file) => {
-                        formData.append('files', file); // Append each file
+                        formData.append('files', file);
                     });
                 }
                 const hasValidData =
@@ -111,7 +111,7 @@ const UploadProject = () => {
             }
         };
 
-        if (Object.keys(debouncedDraft).length > 0) { // Ensure there's data to upload
+        if (Object.keys(debouncedDraft).length > 0) {
             uploadDraft();
         }
     }, [debouncedDraft, currentUser.email, selectedFiles]);
@@ -125,7 +125,6 @@ const UploadProject = () => {
         const files = Array.from(e.target.files);
         setSelectedFiles(files);
 
-        // const newDraft = files.map(file => ({ image: file, title: '' }));
 
         if (activeSection === "gallery") {
             const newImagesWithTitles = files.map(file => ({ file, title: '' }));
@@ -140,19 +139,22 @@ const UploadProject = () => {
 
 
         } else if (activeSection === "blog") {
-            const newBlogsWithTitles = files.map(file => ({ file, title: '' }));
-            const newBlogsWithDesc = files.map(file => ({ file, desc: '' }));
+            const newBlogsWithDetails = files.map(file => ({
+                file,
+                title: '',
+                desc: ''
+            }));
+
             setUploadedBlogs([...uploadedBlogs, ...files]);
-            setBlogsWithTitles([...blogsWithTitles, ...newBlogsWithTitles]);
-            setBlogsWithDesc([...blogsWithDesc, ...newBlogsWithDesc]);
-
-
+            setBlogsWithTitles([...blogsWithTitles, ...newBlogsWithDetails]);
         } else if (activeSection === "news") {
-            const newNewsWithTitles = files.map(file => ({ file, title: '' }));
-            const newNewsWithDesc = files.map(file => ({ file, desc: '' }));
+            const newNewsWithDetails = files.map(file => ({
+                file,
+                title: '',
+                desc: ''
+            }));
             setUploadedNews([...uploadedNews, ...files]);
-            setNewsWithTitles([...newsWithTitles, ...newNewsWithTitles]);
-            setNewsWithDesc([...newsWithDesc, ...newNewsWithDesc]);
+            setNewsWithTitles([...newsWithTitles, ...newNewsWithDetails]);
 
         }
     };
@@ -184,12 +186,10 @@ const UploadProject = () => {
         console.log("blogs")
     };
     const handleBlogDescChange = (index, newDesc) => {
-        setBlogsWithDesc(prevDesc =>
-            prevDesc.map((image, i) =>
-                i === index ? { ...image, desc: newDesc } : image
-            )
+        const updatedBlogs = blogsWithTitles.map((blog, i) =>
+            i === index ? { ...blog, desc: newDesc } : blog
         );
-        console.log("desc", blogsWithDesc)
+        setBlogsWithTitles(updatedBlogs);
     };
     const handleNewsTitleChange = (index, newTitle) => {
         setNewsWithTitles(prevTitles =>
@@ -200,12 +200,10 @@ const UploadProject = () => {
         console.log("blogs")
     };
     const handleNewsDescChange = (index, newDesc) => {
-        setNewsWithDesc(prevDesc =>
-            prevDesc.map((image, i) =>
-                i === index ? { ...image, desc: newDesc } : image
-            )
+        const updatedNews = newsWithTitles.map((news, i) =>
+            i === index ? { ...news, desc: newDesc } : news
         );
-        console.log("desc", blogsWithDesc)
+        setNewsWithTitles(updatedNews);
     };
     const handleUpload = async () => {
         console.log("uploaded")
@@ -235,7 +233,6 @@ const UploadProject = () => {
                 alert("Upload successful!");
                 setImagesWithTitles([]);
                 setSelectedFiles(null);
-                // setDraft([]);
             } catch (error) {
                 console.error("Error uploading:", error);
                 alert(`Error uploading: ${error.message}`);
@@ -266,11 +263,9 @@ const UploadProject = () => {
         }
         else if (activeSection === "blog") {
             selectedFiles.forEach((file) => formData.append("blog", file));
-            blogsWithTitles.forEach((blogWithTitle, index) => {
-                formData.append(`titles[${index}]`, blogWithTitle.title || '');
-            });
-            blogsWithDesc.forEach((blogWithDesc, index) => {
-                formData.append(`desc[${index}]`, blogWithDesc.desc || '');
+            blogsWithTitles.forEach((blogWithDetails, index) => {
+                formData.append(`titles[${index}]`, blogWithDetails.title || '');
+                formData.append(`desc[${index}]`, blogWithDetails.desc || '');
             });
             const currentDate = new Date().toLocaleDateString();
             formData.append("date", currentDate);
@@ -297,13 +292,10 @@ const UploadProject = () => {
         }
         else if (activeSection === "news") {
             selectedFiles.forEach((file) => formData.append("news", file));
-            newsWithTitles.forEach((newsWithTitle, index) => {
-                formData.append(`titles[${index}]`, newsWithTitle.title || '');
+            newsWithTitles.forEach((newsWithDetails, index) => {
+                formData.append(`titles[${index}]`, newsWithDetails.title || '');
+                formData.append(`desc[${index}]`, newsWithDetails.desc || '');
             });
-            newsWithDesc.forEach((newWithDesc, index) => {
-                formData.append(`desc[${index}]`, newWithDesc.desc || '');
-            });
-            console.log(formData)
             try {
                 const response = await fetch(`http://localhost:8000/users/${currentUser.email}/news`, {
                     method: 'PATCH',
@@ -325,7 +317,23 @@ const UploadProject = () => {
             }
         }
     };
+    const handleCancel = () => {
+        setSelectedFiles(null);  // Clear the selected files
+        setImagesWithTitles([]); // Clear image titles (if relevant)
+        setVideosWithTitles([]); // Clear video titles (if relevant)
+        setBlogsWithTitles([]);  // Clear blog titles (if relevant)
+        setBlogsWithDesc([]);    // Clear blog descriptions (if relevant)
+        setNewsWithTitles([]);   // Clear news titles (if relevant)
+        setNewsWithDesc([]);     // Clear news descriptions (if relevant)
 
+        // If you're using a file input element, you can also reset it like this:
+        const fileInput = document.querySelector('input[type="file"]');
+        if (fileInput) {
+            fileInput.value = '';  // Clear the actual file input field in the form
+        }
+
+        console.log("Upload canceled, form cleared");
+    }
     return (
         <div className="flex flex-col md:flex-row">
             <DashboardLeft paddingBottom="16.5rem" />
@@ -506,7 +514,7 @@ const UploadProject = () => {
                 </div>
 
                 <div className="flex justify-center mt-6 gap-6">
-                    <button className="border-2 border-[rgb(122,173,255)] px-6 rounded-lg text-xl text-[rgb(122,173,255)] py-1">
+                    <button onClick={handleCancel} className="border-2 border-[rgb(122,173,255)] px-6 rounded-lg text-xl text-[rgb(122,173,255)] py-1">
                         Cancel
                     </button>
                     <button
