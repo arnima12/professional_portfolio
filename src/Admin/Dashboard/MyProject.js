@@ -24,7 +24,7 @@ const MyProject = () => {
             setError(null);
             try {
                 if (userEmail) {
-                    const response = await fetch(`http://localhost:8000/users/${userEmail}`);
+                    const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${userEmail}`);
                     const contentType = response.headers.get('content-type');
                     if (!response.ok) {
                         throw new Error(`Error: ${response.statusText}`);
@@ -58,7 +58,7 @@ const MyProject = () => {
 
     const deleteItem = async (itemType, itemUrl) => {
         try {
-            const response = await fetch(`http://localhost:8000/users/${userEmail}/delete`, {
+            const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${userEmail}/delete`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ const MyProject = () => {
             deletedAt: new Date().toISOString(),
         };
         try {
-            const response = await fetch(`http://localhost:8000/users/${userEmail}/store-deleted-item`, {
+            const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${userEmail}/store-deleted-item`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

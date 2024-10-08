@@ -5,7 +5,7 @@ const useAdmin = email => {
     const [isAdminLoading, setIsAdminLoading] = useState(true);
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:8000//users/${email}`)
+            fetch(`https://innova-portfolio-server.vercel.app//users/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);

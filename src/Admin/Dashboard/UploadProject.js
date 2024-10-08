@@ -92,7 +92,7 @@ const UploadProject = () => {
                         draft.news?.files.some(file => file.file || file.title));
 
                 if (hasValidData) {
-                    const response = await fetch(`http://localhost:8000/users/${currentUser.email}/updatedDraft`, {
+                    const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${currentUser.email}/updatedDraft`, {
                         method: 'PATCH',
                         body: formData,
                     });
@@ -221,7 +221,7 @@ const UploadProject = () => {
             });
 
             try {
-                const response = await fetch(`http://localhost:8000/users/${currentUser.email}/gallery`, {
+                const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${currentUser.email}/gallery`, {
                     method: 'PATCH',
                     body: formData,
                 });
@@ -244,7 +244,7 @@ const UploadProject = () => {
                 formData.append(`titles[${index}]`, videoWithTitle.title || '');
             });
             try {
-                const response = await fetch(`http://localhost:8000/users/${currentUser.email}/video`, {
+                const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${currentUser.email}/video`, {
                     method: 'PATCH',
                     body: formData,
                 });
@@ -271,7 +271,7 @@ const UploadProject = () => {
             formData.append("date", currentDate);
             console.log(formData)
             try {
-                const response = await fetch(`http://localhost:8000/users/${currentUser.email}/blog`, {
+                const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${currentUser.email}/blog`, {
                     method: 'PATCH',
                     body: formData,
                 });
@@ -297,7 +297,7 @@ const UploadProject = () => {
                 formData.append(`desc[${index}]`, newsWithDetails.desc || '');
             });
             try {
-                const response = await fetch(`http://localhost:8000/users/${currentUser.email}/news`, {
+                const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${currentUser.email}/news`, {
                     method: 'PATCH',
                     body: formData,
                 });

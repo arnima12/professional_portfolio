@@ -14,7 +14,7 @@ const Banner = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await fetch('http://localhost:8000/users');
+                const response = await fetch('https://innova-portfolio-server.vercel.app/users');
                 const users = await response.json();
                 const currentUserData = users.find(user => user.email === email);
                 setUserData(currentUserData);

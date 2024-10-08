@@ -30,7 +30,7 @@ const DashboardRight = () => {
     useEffect(() => {
         const fetchNotifications = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/users/${email}/notifications`);
+                const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${email}/notifications`);
                 if (response.ok) {
                     const data = await response.json();
                     setNotifications(data.notifications);
@@ -52,7 +52,7 @@ const DashboardRight = () => {
             setError(null);
             try {
                 if (email) {
-                    const response = await fetch(`http://localhost:8000/users/${email}/store-deleted-item`);
+                    const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${email}/store-deleted-item`);
                     const contentType = response.headers.get('content-type');
                     if (!response.ok) {
                         throw new Error(`Error: ${response.statusText}`);
@@ -78,7 +78,7 @@ const DashboardRight = () => {
     const handleDelete = async (itemId) => {
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost:8000/users/${email}/delete-item/${itemId}`, {
+            const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${email}/delete-item/${itemId}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {

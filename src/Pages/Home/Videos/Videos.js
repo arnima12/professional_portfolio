@@ -11,7 +11,7 @@ const Videos = () => {
         const fetchUserData = async () => {
             try {
                 if (email && email !== 'undefined') {
-                    const response = await fetch(`http://localhost:8000/users/${email}/video`);
+                    const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${email}/video`);
                     const contentType = response.headers.get('content-type');
                     if (!response.ok) {
                         throw new Error(`Error: ${response.statusText}`);

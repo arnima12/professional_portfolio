@@ -7,7 +7,7 @@ const useToken = (email) => {
         const getToken = async () => {
             if (email) {
                 try {
-                    const response = await fetch(`http://localhost:8000/users/jwt?email=${email}`);
+                    const response = await fetch(`https://innova-portfolio-server.vercel.app/users/jwt?email=${email}`);
                     if (!response.ok) {
                         throw new Error('Failed to fetch token');
                     }

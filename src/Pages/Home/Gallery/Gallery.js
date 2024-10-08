@@ -13,7 +13,7 @@ const Gallery = () => {
             if (email && email !== 'undefined') {
 
                 try {
-                    const response = await fetch(`http://localhost:8000/users/${email}/gallery`);
+                    const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${email}/gallery`);
                     const contentType = response.headers.get('content-type');
 
                     if (!response.ok) {

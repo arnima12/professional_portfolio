@@ -21,7 +21,7 @@ const Contact = () => {
         console.log('Form data:', data);
 
         try {
-            const response = await fetch(`http://localhost:8000/users/${email}/notifications`, {
+            const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${email}/notifications`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

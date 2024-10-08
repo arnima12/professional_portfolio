@@ -13,7 +13,7 @@ const Education = () => {
             try {
                 console.log("Email from URL params:", email);
                 if (email) {
-                    const response = await fetch(`http://localhost:8000/users/${email}`);
+                    const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${email}`);
                     const contentType = response.headers.get('content-type');
 
                     if (response.status === 404) {
@@ -26,7 +26,7 @@ const Education = () => {
                                 grades: "3.50",
                                 startYear: "2020",
                                 endYear: "2023",
-                                logo: "http://localhost:8000/uploads/1726658196668.png",
+                                logo: "https://innova-portfolio-server.vercel.app/uploads/1726658196668.png",
                                 border: true
                             },
                             {
@@ -36,7 +36,7 @@ const Education = () => {
                                 grades: "3.50",
                                 startYear: "2020",
                                 endYear: "2023",
-                                logo: "http://localhost:8000/uploads/1726658196668.png",
+                                logo: "https://innova-portfolio-server.vercel.app/uploads/1726658196668.png",
                                 border: true
                             },
                         ];
@@ -63,7 +63,7 @@ const Education = () => {
                             grades: "3.50",
                             startYear: "2020",
                             endYear: "2023",
-                            logo: "http://localhost:8000/uploads/1726658196668.png",
+                            logo: "https://innova-portfolio-server.vercel.app/uploads/1726658196668.png",
                             border: true
                         },
                         {
@@ -73,7 +73,7 @@ const Education = () => {
                             grades: "3.50",
                             startYear: "2020",
                             endYear: "2023",
-                            logo: "http://localhost:8000/uploads/1726658196668.png",
+                            logo: "https://innova-portfolio-server.vercel.app/uploads/1726658196668.png",
                             border: true
                         },
                     ];

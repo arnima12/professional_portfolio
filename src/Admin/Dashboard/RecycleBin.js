@@ -19,7 +19,7 @@ const RecycleBin = () => {
             setError(null);
             try {
                 if (email) {
-                    const response = await fetch(`http://localhost:8000/users/${email}/store-deleted-item`);
+                    const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${email}/store-deleted-item`);
                     const contentType = response.headers.get('content-type');
                     if (!response.ok) {
                         throw new Error(`Error: ${response.statusText}`);
@@ -47,7 +47,7 @@ const RecycleBin = () => {
         const item = deletedItems[index]; // Get the item to delete
 
         try {
-            const response = await fetch(`http://localhost:8000/users/${email}/delete-item`, {
+            const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${email}/delete-item`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

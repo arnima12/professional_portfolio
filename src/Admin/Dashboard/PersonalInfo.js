@@ -40,7 +40,7 @@ const PersonalInfo = () => {
     console.log("user", userData)
     const fetchUserData = async (userEmail) => {
         try {
-            const response = await fetch(`http://localhost:8000/users/${userEmail}`);
+            const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${userEmail}`);
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -231,7 +231,7 @@ const PersonalInfo = () => {
         try {
             console.log("Sending request to backend...");
 
-            const response = await fetch(`http://localhost:8000/users/${userEmail}`, {
+            const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${userEmail}`, {
                 method: "PATCH",
                 body: formDataToSend,
             });
@@ -263,7 +263,7 @@ const PersonalInfo = () => {
         }))
         console.log("Updated education array:", formData.education);
         const userEmail = currentUser.email;
-        const url = `http://localhost:8000/users/${userEmail}`;
+        const url = `https://innova-portfolio-server.vercel.app/users/${userEmail}`;
         console.log("url", url)
         try {
             const response = await fetch(url, {
@@ -291,7 +291,7 @@ const PersonalInfo = () => {
                 education: prevData.education.filter((_, index) => index !== educationIndex),
             }));
             const userEmail = currentUser.email;
-            const url = `http://localhost:8000/users/${userEmail}/remove-education`
+            const url = `https://innova-portfolio-server.vercel.app/users/${userEmail}/remove-education`
 
             const response = await fetch(url, {
                 method: 'PATCH',
@@ -325,7 +325,7 @@ const PersonalInfo = () => {
             experience: [...prevData.experience, newExperience],
         }));
         try {
-            const response = await fetch(`http://localhost:8000/users/${currentUser.email}`, {
+            const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${currentUser.email}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -351,7 +351,7 @@ const PersonalInfo = () => {
                 experience: prevData.experience.filter((_, index) => index !== experienceIndex),
             }));
             const userEmail = currentUser.email;
-            const url = `http://localhost:8000/users/${userEmail}/remove-experience`
+            const url = `https://innova-portfolio-server.vercel.app/users/${userEmail}/remove-experience`
 
             const response = await fetch(url, {
                 method: 'PATCH',

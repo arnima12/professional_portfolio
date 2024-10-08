@@ -67,7 +67,7 @@ const SignUpRight = () => {
     const saveUser = (name, email) => {
         const user = { name, email };
         console.log("user", user);
-        fetch('http://localhost:8000/users', {
+        fetch('https://innova-portfolio-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

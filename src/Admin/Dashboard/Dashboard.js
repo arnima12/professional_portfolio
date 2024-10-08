@@ -20,7 +20,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchReachData = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/view/${email}`);
+                const response = await fetch(`https://innova-portfolio-server.vercel.app/view/${email}`);
                 const data = await response.json();
                 if (response.ok) {
                     setCurrentReach(data.viewCount);

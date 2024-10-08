@@ -11,7 +11,7 @@ const AllBlogs = () => {
         const fetchUserData = async () => {
             try {
                 if (email && email !== 'undefined') {
-                    const response = await fetch(`http://localhost:8000/users/${email}/blog`);
+                    const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${email}/blog`);
                     console.log("response", response);
                     const contentType = response.headers.get('content-type');
                     console.log("headers", contentType);
