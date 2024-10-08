@@ -4,7 +4,7 @@ const PhotoGallery = ({ image }) => {
     const { image: imgSrc, title } = image;
     return (
         <div>
-            <img src={imgSrc} alt={title} className="w-[18rem] h-auto"
+            <img src={imgSrc} alt={title} className="w-[18rem] h-[18rem]"
             />
             <h1 className="text-2xl">{title}</h1>
         </div>

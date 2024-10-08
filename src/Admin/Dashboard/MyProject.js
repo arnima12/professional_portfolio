@@ -137,25 +137,25 @@ const MyProject = () => {
                         className={`w-[10rem] h-[2rem] text-xl font-bold rounded-lg px-2 cursor-pointer ${activeSection === 'image' ? 'bg-[rgb(17,72,153)] text-white' : 'border-2 border-[rgb(17,72,153)] text-[rgb(17,72,153)]'}`}
                         onClick={() => handleSectionChange('image')}
                     >
-                        Add Image
+                        Image
                     </div>
                     <div
                         className={`w-[10rem] h-[2rem] text-xl font-bold rounded-lg px-2 cursor-pointer ${activeSection === 'video' ? 'bg-[rgb(128,234,227)] text-white' : 'border-2 border-[rgb(128,234,227)] text-[rgb(128,234,227)]'}`}
                         onClick={() => handleSectionChange('video')}
                     >
-                        Add Video
+                        Video
                     </div>
                     <div
                         className={`w-[10rem] h-[2rem] text-xl font-bold rounded-lg px-2 cursor-pointer ${activeSection === 'blog' ? 'bg-[rgb(102,145,214)] text-white' : 'border-2 border-[rgb(102,145,214)] text-[rgb(102,145,214)]'}`}
                         onClick={() => handleSectionChange('blog')}
                     >
-                        Add Blog
+                        Blog
                     </div>
                     <div
                         className={`w-[10rem] h-[2rem] text-xl font-bold rounded-lg px-2 cursor-pointer ${activeSection === 'news' ? 'bg-[rgb(17,72,153)] text-white' : 'border-2 border-[rgb(17,72,153)] text-[rgb(17,72,153)]'}`}
                         onClick={() => handleSectionChange('news')}
                     >
-                        Add News
+                        News
                     </div>
                 </div>
                 <div className="w-full mt-12 ">
@@ -167,7 +167,7 @@ const MyProject = () => {
                                 <div className="mb-8 grid grid-cols-4 gap-12">
                                     {gallery.map((image, index) => (
                                         <div key={index}>
-                                            <img src={image.image} alt="gallery" className="w-[48rem] h-auto" />
+                                            <img src={image.image} alt="gallery" className="w-[48rem] h-[20rem]" />
                                             <h3 className="text-xl font-bold">{image.title}</h3>
                                             <div className="flex justify-center mt-6">
                                                 <button className="border-2 border-[rgb(122,173,255)] px-6 rounded-lg text-xl text-[rgb(122,173,255)] py-1" onClick={() => handleDelete('image', image.image, image.title)}>Delete</button>
@@ -180,7 +180,7 @@ const MyProject = () => {
                                 <div className="mb-8 grid grid-cols-4 gap-12">
                                     {video.map((vid, index) => (
                                         <div key={index}>
-                                            <video controls src={vid.video} className="w-[48rem] h-auto"></video>
+                                            <video controls src={vid.video} className="w-[48rem] h-[20rem]"></video>
                                             <h3 className="text-xl font-bold">{vid.title}</h3>
                                             <div className="flex justify-center mt-6">
                                                 <button className="border-2 border-[rgb(122,173,255)] px-6 rounded-lg text-xl text-[rgb(122,173,255)] py-1" onClick={() => handleDelete('video', vid.video, vid.title)}>Delete</button>
@@ -193,7 +193,7 @@ const MyProject = () => {
                                 <div className="mb-8 grid grid-cols-4 gap-12">
                                     {blogs.map((blog, index) => (
                                         <div key={index}>
-                                            <img src={blog.image} alt="blogs" className="w-[48rem] h-auto" />
+                                            <img src={blog.image} alt="blogs" className="w-[48rem] h-[20rem]" />
                                             <h3 className="text-xl font-bold">{blog.title}</h3>
                                             <div className="flex justify-center mt-6">
                                                 <button className="border-2 border-[rgb(122,173,255)] px-6 rounded-lg text-xl text-[rgb(122,173,255)] py-1" onClick={() => handleDelete('blog', blog.image, blog.title)}>Delete</button>
@@ -206,7 +206,7 @@ const MyProject = () => {
                                 <div className="mb-8 grid grid-cols-4 gap-12">
                                     {news.map((article, index) => (
                                         <div key={index}>
-                                            <img src={article.image} alt="news" className="w-[48rem] h-auto" />
+                                            <img src={article.image} alt="news" className="w-[48rem] h-[20rem]" />
                                             <h3 className="text-xl font-bold">{article.title}</h3>
                                             <div className="flex justify-center mt-6">
                                                 <button className="border-2 border-[rgb(122,173,255)] px-6 rounded-lg text-xl text-[rgb(122,173,255)] py-1" onClick={() => handleDelete('news', article.image, article.title)}>Delete</button>

@@ -65,9 +65,9 @@ const Banner = () => {
                 <div className="bg-sky-500 w-[40%] md:w-[60%] h-[50rem]">
                     <div className="client-photo">
                         {userData && userData.image ? (
-                            <img src={userData.image} alt="User Logo" className="h-[30rem] lg:h-[40rem] w-[15rem] md:w-[40rem] lg:w-[50rem] lg:bottom-[1rem] bottom-[5rem]" />
+                            <img src={userData.image} alt="User Logo" className="h-[30rem] lg:h-[40rem] w-[15rem] md:w-[40rem] lg:w-[50rem]" />
                         ) : (
-                            <img src={clientPhoto} alt="" className="h-[30rem] lg:h-[40rem] w-[15rem] md:w-[40rem] lg:w-[50rem] lg:bottom-[1rem] bottom-[5rem]" />
+                            <img src={clientPhoto} alt="" className="h-[30rem] lg:h-[40rem] w-[15rem] md:w-[40rem] lg:w-[50rem]" />
                         )}
 
                     </div>
