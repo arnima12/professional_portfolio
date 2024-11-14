@@ -98,7 +98,7 @@ const DashboardRight = () => {
         e.preventDefault();
         const newEvent = { title, date, description };
         try {
-            const response = await fetch(`http://localhost:8000/users/${email}/events`, {
+            const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${email}/events`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
