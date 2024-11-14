@@ -30,7 +30,7 @@ const DashboardLeft = ({ paddingBottom }) => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await fetch('https://innova-portfolio-server.vercel.app/users');
+                const response = await fetch('https://professional-portfolio-backend-gjit.onrender.com/users');
                 const users = await response.json();
                 const currentUserData = users.find(user => user.email === currentUser.email);
                 setUserData(currentUserData);

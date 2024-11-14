@@ -20,7 +20,7 @@ const Home = () => {
         const hasViewed = sessionStorage.getItem(`viewed-${email}`);
         const fetchViewCount = async () => {
             try {
-                const response = await fetch('https://innova-portfolio-server.vercel.app/view', {
+                const response = await fetch('https://professional-portfolio-backend-gjit.onrender.com/view', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

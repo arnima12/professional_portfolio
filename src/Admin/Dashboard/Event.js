@@ -16,7 +16,7 @@ const Event = () => {
         const fetchEvents = async () => {
             setEventLoading(true);
             try {
-                const response = await axios.get(`https://innova-portfolio-server.vercel.app/users/${email}/events`);
+                const response = await axios.get(`https://professional-portfolio-backend-gjit.onrender.com/users/${email}/events`);
                 setEvents(response.data);
             } catch (error) {
                 console.error('Error fetching events:', error);

@@ -11,7 +11,7 @@ const Analytics = () => {
     useEffect(() => {
         const fetchReachHistory = async () => {
             try {
-                const response = await fetch(`https://innova-portfolio-server.vercel.app/view/${email}`);
+                const response = await fetch(`https://professional-portfolio-backend-gjit.onrender.com/view/${email}`);
                 const data = await response.json();
                 console.log("reach", data)
                 if (response.ok) {

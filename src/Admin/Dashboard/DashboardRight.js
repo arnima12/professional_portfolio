@@ -30,7 +30,7 @@ const DashboardRight = () => {
     useEffect(() => {
         const fetchNotifications = async () => {
             try {
-                const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${email}/notifications`);
+                const response = await fetch(`https://professional-portfolio-backend-gjit.onrender.com/users/${email}/notifications`);
                 if (response.ok) {
                     const data = await response.json();
                     setNotifications(data.notifications);
@@ -52,7 +52,7 @@ const DashboardRight = () => {
             setError(null);
             try {
                 if (email) {
-                    const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${email}/store-deleted-item`);
+                    const response = await fetch(`https://professional-portfolio-backend-gjit.onrender.com/users/${email}/store-deleted-item`);
                     const contentType = response.headers.get('content-type');
                     if (!response.ok) {
                         throw new Error(`Error: ${response.statusText}`);
@@ -78,7 +78,7 @@ const DashboardRight = () => {
     const handleDelete = async (itemId) => {
         setLoading(true);
         try {
-            const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${email}/delete-item/${itemId}`, {
+            const response = await fetch(`https://professional-portfolio-backend-gjit.onrender.com/users/${email}/delete-item/${itemId}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {
@@ -98,7 +98,7 @@ const DashboardRight = () => {
         e.preventDefault();
         const newEvent = { title, date, description };
         try {
-            const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${email}/events`, {
+            const response = await fetch(`https://professional-portfolio-backend-gjit.onrender.com/users/${email}/events`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

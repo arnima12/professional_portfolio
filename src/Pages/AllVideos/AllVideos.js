@@ -14,7 +14,7 @@ const AllVideos = () => {
         const fetchUserData = async () => {
             try {
                 if (email && email !== 'undefined') {
-                    const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${email}/video`);
+                    const response = await fetch(`https://professional-portfolio-backend-gjit.onrender.com/users/${email}/video`);
                     console.log("response", response);
                     const contentType = response.headers.get('content-type');
                     console.log("headers", contentType);

@@ -28,7 +28,7 @@ const Settings = () => {
     useEffect(() => {
         const fetchNotifications = async () => {
             try {
-                const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${email}/notifications`);
+                const response = await fetch(`https://professional-portfolio-backend-gjit.onrender.com/users/${email}/notifications`);
                 if (response.ok) {
                     const data = await response.json();
                     setNotifications(data.notifications);
@@ -50,7 +50,7 @@ const Settings = () => {
         e.preventDefault();
         const newEvent = { title, date, description };
         try {
-            const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${email}/events`, {
+            const response = await fetch(`https://professional-portfolio-backend-gjit.onrender.com/users/${email}/events`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ const Settings = () => {
     useEffect(() => {
         const fetchLogo = async () => {
             try {
-                const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${currentUser.email}`);
+                const response = await fetch(`https://professional-portfolio-backend-gjit.onrender.com/users/${currentUser.email}`);
                 const result = await response.json();
                 if (response.ok) {
                     setPreview(result.logo || upload);
@@ -120,7 +120,7 @@ const Settings = () => {
         formData.append('logo', image);
 
         try {
-            const response = await fetch(`https://innova-portfolio-server.vercel.app/users/${currentUser.email}/update-logo`, {
+            const response = await fetch(`https://professional-portfolio-backend-gjit.onrender.com/users/${currentUser.email}/update-logo`, {
                 method: 'PATCH',
                 body: formData,
             });
